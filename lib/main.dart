@@ -18,7 +18,5 @@ class MyApp extends StatelessWidget {
   }
 }
 //Ahmet Bahar deneme1
-
-
-
+// FURKAN DENEME
 // Omer Deneme1
