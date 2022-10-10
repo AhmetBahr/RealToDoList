@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'NavigationDrawer.dart';
+
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -17,15 +19,24 @@ class _MainPageState extends State<MainPage> {
         appBar: AppBar(),
         body: TabBarView(children: [
           Container(
-            color: Colors.grey,
+            color: Colors.red,
           ),
         ]),
+        drawer: NavigationDrawerWidget(),
         bottomNavigationBar: const BottomAppBar(
             child: TabBar(tabs: [
           Tab(
+            icon: Icon(
+              Icons.list_alt,
+              color: Colors.black,
+            ),
             text: "Page1",
           ),
           Tab(
+            icon: Icon(
+              Icons.add_box,
+              color: Colors.brown,
+            ),
             text: "Page2",
           ),
         ])),
