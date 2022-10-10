@@ -17,6 +17,3 @@ class MyApp extends StatelessWidget {
     return MaterialApp(home: MainPage());
   }
 }
-//Ahmet Bahar deneme1
-// FURKAN DENEME
-// Omer Deneme1
