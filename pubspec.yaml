@@ -40,6 +40,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+    auto_size_text: ^3.0.0
+    flutter_svg: ^1.1.5
+    mobx: ^2.1.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -60,7 +63,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+   assets:
+    -Image/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

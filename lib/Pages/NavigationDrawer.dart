@@ -9,23 +9,23 @@ class NavigationDrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: Colors.amberAccent,
+        color: Colors.blueGrey[100],
         child: ListView(
           padding: padding,
           children: <Widget>[
             const SizedBox(
-              height: 98,
+              height: 240,
             ),
-            buildMenuItem(text: "Peoble", icon: Icons.people, onClicked: () {}),
+            buildMenuItem(text: "1", icon: Icons.people, onClicked: () {}),
+            const SizedBox(
+              height: 16,
+            ),
+            buildMenuItem(text: "2", icon: Icons.favorite, onClicked: () {}),
             const SizedBox(
               height: 16,
             ),
             buildMenuItem(
-                text: "osman", icon: Icons.headset_rounded, onClicked: () {}),
-            const SizedBox(
-              height: 16,
-            ),
-            buildMenuItem(text: "Peoble", icon: Icons.people, onClicked: () {}),
+                text: "3", icon: Icons.back_hand_rounded, onClicked: () {}),
             const SizedBox(
               height: 24,
             ),
@@ -36,7 +36,7 @@ class NavigationDrawerWidget extends StatelessWidget {
             const SizedBox(
               height: 24,
             ),
-            buildMenuItem(text: "Peoble", icon: Icons.people, onClicked: () {}),
+            buildMenuItem(text: "4", icon: Icons.add_alarm, onClicked: () {}),
           ],
         ),
       ),
@@ -48,7 +48,7 @@ class NavigationDrawerWidget extends StatelessWidget {
     required IconData icon,
     VoidCallback? onClicked,
   }) {
-    final color = Colors.white;
+    final color = Colors.black;
     final hoverColor = Colors.white;
 
     return ListTile(
