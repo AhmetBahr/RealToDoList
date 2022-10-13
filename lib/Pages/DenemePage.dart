@@ -3,24 +3,24 @@ import 'package:flutter/material.dart';
 import '../conts/MyActionButton.dart';
 import '../conts/NavigationDrawer.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+class DenemePage extends StatefulWidget {
+  const DenemePage({super.key});
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<DenemePage> createState() => _DenemePage();
 }
 
-class _MainPageState extends State<MainPage> {
+class _DenemePage extends State<DenemePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         floatingActionButton: MyActionButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: TabBarView(children: [
           Container(
-            color: Colors.red,
+            color: Colors.green,
           ),
         ]),
         drawer: NavigationDrawerWidget(),
