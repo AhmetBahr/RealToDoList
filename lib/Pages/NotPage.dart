@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../conts/MyActionButton.dart';
-import '../conts/NavigationDrawer.dart';
+import '../Const/MidActionButton.dart';
+import '../Const/MyActionButton.dart';
+import '../Const/NavigationDrawer.dart';
 
-class DenemePage2 extends StatefulWidget {
-  const DenemePage2({super.key});
+class NotPage extends StatefulWidget {
+  const NotPage({super.key});
 
   @override
-  State<DenemePage2> createState() => _DenemePage2();
+  State<NotPage> createState() => _NotePage();
 }
 
-class _DenemePage2 extends State<DenemePage2> {
+class _NotePage extends State<NotPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: MyActionButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+
+      ///floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Column(children: [
         Expanded(
             flex: 3,
@@ -25,7 +27,7 @@ class _DenemePage2 extends State<DenemePage2> {
         Expanded(
             flex: 6,
             child: Container(
-              color: Colors.green,
+              color: Colors.cyanAccent[100],
             ))
       ]),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'BottomNavigation/BottomNavigationBottom.dart';
+import 'Pages/NotPage.dart';
 import 'Pages/MainPages.dart';
 
 void main() async {
@@ -15,6 +16,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MyBottomBar());
+    return MaterialApp(home: NotPage());
   }
 }

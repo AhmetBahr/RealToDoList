@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../conts/MyActionButton.dart';
-import '../conts/NavigationDrawer.dart';
+import '../Const/MyActionButton.dart';
+import '../Const/NavigationDrawer.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
