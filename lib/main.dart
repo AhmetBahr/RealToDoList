@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'BottomNavigation/BottomNavigationBottom.dart';
+import 'Const/BottomNavigation/BottomNavigationBottom.dart';
 import 'Pages/NotPage.dart';
-import 'Pages/MainPages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
