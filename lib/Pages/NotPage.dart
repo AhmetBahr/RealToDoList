@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../Const/MidActionButton.dart';
 import '../Const/MyActionButton.dart';
 import '../Const/NavigationDrawer.dart';
+import '../Const/TopCategory.dart';
 
 class NotPage extends StatefulWidget {
   const NotPage({super.key});
@@ -17,34 +18,12 @@ class _NotePage extends State<NotPage> {
     return Scaffold(
       backgroundColor: Colors.pink[100],
       floatingActionButton: MyActionButton(),
+      drawer: NavigationDrawerWidget(),
       body: Column(children: [
         Expanded(
             child: ListView(
           children: [
-            SizedBox(
-              height: 50,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Container(
-                    color: Colors.redAccent,
-                    width: 150,
-                  ),
-                  Container(
-                    color: Colors.blueAccent,
-                    width: 150,
-                  ),
-                  Container(
-                    color: Colors.green,
-                    width: 150,
-                  ),
-                  Container(
-                    color: Colors.purple,
-                    width: 150,
-                  ),
-                ],
-              ),
-            ),
+            TopCategory(),
             const Divider(),
             Container(
               child: Text(
@@ -61,34 +40,6 @@ class _NotePage extends State<NotPage> {
               height: 60,
             ),
             const Divider(),
-/*             Container(
-              color: Colors.green,
-              height: 80,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              color: Colors.red,
-              height: 80,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              color: Colors.blue,
-              height: 80,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              color: Colors.pink,
-              height: 80,
-            ),
-            SizedBox(
-              height: 10,
-            ),
             Container(
               color: Colors.green,
               height: 80,
@@ -116,7 +67,35 @@ class _NotePage extends State<NotPage> {
             ),
             SizedBox(
               height: 10,
-            ),*/
+            ),
+            Container(
+              color: Colors.green,
+              height: 80,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              color: Colors.red,
+              height: 80,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              color: Colors.blue,
+              height: 80,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              color: Colors.pink,
+              height: 80,
+            ),
+            SizedBox(
+              height: 10,
+            ),
           ],
         ))
       ]),

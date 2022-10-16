@@ -14,29 +14,83 @@ class NavigationDrawerWidget extends StatelessWidget {
           padding: padding,
           children: <Widget>[
             const SizedBox(
-              height: 240,
+              height: 50,
             ),
-            buildMenuItem(text: "1", icon: Icons.people, onClicked: () {}),
+            Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              margin: EdgeInsetsDirectional.all(1),
+              color: Colors.grey.shade800,
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(2),
+                    height: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      shape: BoxShape.rectangle,
+                      border: Border.all(color: Colors.grey.shade800, width: 5),
+                      /*   image: DecorationImage(
+                          image: ),*/
+                    ),
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(
               height: 16,
-            ),
-            buildMenuItem(text: "2", icon: Icons.favorite, onClicked: () {}),
-            const SizedBox(
-              height: 16,
-            ),
-            buildMenuItem(
-                text: "3", icon: Icons.back_hand_rounded, onClicked: () {}),
-            const SizedBox(
-              height: 24,
             ),
             const Divider(
-              //Çalışmıyor
+              color: Colors.black,
+            ),
+            buildMenuItem(
+                text: "Pro",
+                icon: Icons.account_balance_rounded,
+                onClicked: () {}),
+            const SizedBox(
+              height: 5,
+            ),
+            buildMenuItem(
+                text: "Yıldızlı Görevler",
+                icon: Icons.star_rounded,
+                onClicked: () {}),
+            const SizedBox(
+              height: 5,
+            ),
+            buildMenuItem(
+                text: "Kategori", icon: Icons.category, onClicked: () {}),
+            const SizedBox(
+              height: 16,
+            ),
+            const Divider(
               color: Colors.black,
             ),
             const SizedBox(
-              height: 24,
+              height: 5,
             ),
-            buildMenuItem(text: "4", icon: Icons.add_alarm, onClicked: () {}),
+            buildMenuItem(
+                text: "Tema",
+                icon: Icons.brightness_medium_sharp,
+                onClicked: () {}),
+            const SizedBox(
+              height: 5,
+            ),
+            buildMenuItem(
+                text: "Bağış", icon: Icons.favorite, onClicked: () {}),
+            const SizedBox(
+              height: 5,
+            ),
+            buildMenuItem(
+                text: "Geri Bildirim",
+                icon: Icons.border_color_outlined,
+                onClicked: () {}),
+            const SizedBox(
+              height: 5,
+            ),
+            buildMenuItem(
+                text: "Ayarlar",
+                icon: Icons.settings_rounded,
+                onClicked: () {}),
           ],
         ),
       ),
@@ -48,7 +102,7 @@ class NavigationDrawerWidget extends StatelessWidget {
     required IconData icon,
     VoidCallback? onClicked,
   }) {
-    final color = Colors.black;
+    final color = Colors.grey[700];
     final hoverColor = Colors.white;
 
     return ListTile(
