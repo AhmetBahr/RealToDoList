@@ -16,23 +16,56 @@ class _NotePage extends State<NotPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink[100],
       floatingActionButton: MyActionButton(),
       drawer: NavigationDrawerWidget(),
-      body: Column(children: [
-        Expanded(
-            child: ListView(
-          children: [
-            TopCategory(),
-            const Divider(),
-            Container(
-              child: Text(
-                "Morning",
-                style: TextStyle(fontSize: 50),
-              ),
-              height: 60,
+      body: SizedBox(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(
+                  'https://images.unsplash.com/photo-1541472555878-357a209eb293?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1885&q=80'),
+              fit: BoxFit.cover,
             ),
-            Container(
+          ),
+          child: ListView(
+            children: [
+              TopCategory(),
+              const Divider(),
+              Container(
+                color: Colors.brown,
+                child: Text(
+                  "Morning",
+                  style: TextStyle(fontSize: 50),
+                ),
+                height: 60,
+              ),
+              Container(
+                child: Text(
+                  "To day I do",
+                  style: TextStyle(fontSize: 30),
+                ),
+                height: 60,
+              ),
+              const Divider(),
+              Container(
+                color: Colors.green,
+                height: 80,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+/*          Container(
               child: Text(
                 "To day I do",
                 style: TextStyle(fontSize: 30),
@@ -95,10 +128,4 @@ class _NotePage extends State<NotPage> {
             ),
             SizedBox(
               height: 10,
-            ),
-          ],
-        ))
-      ]),
-    );
-  }
-}
+            ), */

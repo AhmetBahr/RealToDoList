@@ -9,7 +9,7 @@ class NavigationDrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: Colors.blueGrey[100],
+        color: Colors.deepPurple[100],
         child: ListView(
           padding: padding,
           children: <Widget>[
@@ -30,8 +30,11 @@ class NavigationDrawerWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       shape: BoxShape.rectangle,
                       border: Border.all(color: Colors.grey.shade800, width: 5),
-                      /*   image: DecorationImage(
-                          image: ),*/
+                      /*image: DecorationImage(
+                        image: AssetImage(
+                            "undraw_Problem_solving_re_4gq3 kopya.jpg"),
+                        fit: BoxFit.cover,
+                      ),*/
                     ),
                   ),
                 ],

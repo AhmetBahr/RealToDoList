@@ -40,14 +40,25 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # core utilities
+  kartal: ^2.1.0
+  logger: ^1.0.0
+  webview_flutter: ^2.0.4
+  # state management
+  flutter_mobx: ^2.0.0
+  mobx: ^2.0.1
+  provider: ^5.0.0
+  # ui utilities
+  animations: ^2.0.0
+  auto_size_text: ^3.0.0-nullsafety.0
+  cached_network_image: ^3.0.0-nullsafety
+  cupertino_icons: ^1.0.2
+  flutter_rating_bar: ^4.0.0
+  flutter_svg: ^0.21.0-nullsafety.0
+  lottie: ^1.0.1
+  shimmer: ^2.0.0-nullsafety.0
 
 
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
@@ -62,9 +73,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  #assets:
-    
-  #   - Image/svg/
+  assets:
+
+    - asset/svg/undraw_Completing_re_i7ap.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
