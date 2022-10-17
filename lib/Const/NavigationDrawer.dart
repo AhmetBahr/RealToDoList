@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_to_do_list/Const/routes.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   NavigationDrawerWidget({super.key});
@@ -71,6 +72,16 @@ class NavigationDrawerWidget extends StatelessWidget {
                 text: "Pro",
                 icon: Icons.account_balance_rounded,
                 onClicked: () {}),
+            const SizedBox(
+              height: 5,
+            ),
+            buildMenuItem(
+                text: "Giriş",
+                icon: Icons.account_balance_rounded,
+                onClicked: () {
+                  //Navigator.of(context).pushNamedAndRemoveUntil(loginRoute, (route) => false);
+                  print("?");
+                }),
             const SizedBox(
               height: 5,
             ),
