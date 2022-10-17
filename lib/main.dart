@@ -4,6 +4,8 @@ import 'Const/BottomNavigation/BottomNavigationBottom.dart';
 import 'Pages/NotPage.dart';
 import 'package:real_to_do_list/services/auth/auth_service.dart';
 import 'package:real_to_do_list/Pages/login_view.dart';
+import 'package:real_to_do_list/Pages/register_view.dart';
+import 'package:real_to_do_list/Pages/verify_email_view.dart';
 import 'package:real_to_do_list/Const/routes.dart';
 
 void main() async {
@@ -11,9 +13,12 @@ void main() async {
   runApp(
     MaterialApp(  
       title: "ToDo",
-      home: const NotPage(),
+      home: const NotePage(),
       routes: {
         loginRoute: (context) => const LoginView(),
+        registerRoute: (context) => const RegisterView(),
+        verifyEmailRoute: (context) => const VerifyEmailView(),
+        notesRoute: (context) => const NotePage()
       }
     )
   );
@@ -26,6 +31,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: NotPage());
+    return MaterialApp(home: NotePage());
   }
 }

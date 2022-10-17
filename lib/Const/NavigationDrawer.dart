@@ -166,7 +166,7 @@ void selectedItem(BuildContext context, int index) {
     case 0:
       Navigator.of(context).push(MaterialPageRoute(
         builder:
-            (context) => /* BURAYA GIDILCEK SAYFA */ NotPage(), //Bu deneme için kondu
+            (context) => /* BURAYA GIDILCEK SAYFA */ NotePage(), //Bu deneme için kondu
       ));
       break;
     case 1:

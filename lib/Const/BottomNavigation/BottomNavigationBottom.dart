@@ -12,7 +12,7 @@ class _MyBottomBarState extends State<MyBottomBar> {
   final List<Widget> child = [
     //Buraya sayfalar gelicek
 
-    NotPage(),
+    NotePage(),
   ];
   @override
   Widget build(BuildContext context) {
