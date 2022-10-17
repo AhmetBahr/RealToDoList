@@ -32,24 +32,33 @@ class _NotePage extends State<NotPage> {
               TopCategory(),
               const Divider(),
               Container(
-                color: Colors.brown,
                 child: Text(
                   "Morning",
-                  style: TextStyle(fontSize: 50),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                    fontSize: 50,
+                  ),
                 ),
                 height: 60,
               ),
               Container(
                 child: Text(
-                  "To day I do",
-                  style: TextStyle(fontSize: 30),
+                  "To Do List",
+                  style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    color: Colors.white,
+                    fontSize: 30,
+                  ),
                 ),
                 height: 60,
               ),
               const Divider(),
               Container(
-                color: Colors.green,
                 height: 80,
+                decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(100)),
               ),
               SizedBox(
                 height: 10,

@@ -13,23 +13,40 @@ class _TopCategoryState extends State<TopCategory> {
     return SizedBox(
       height: 50,
       child: ListView(
+        padding: EdgeInsets.all(8),
         scrollDirection: Axis.horizontal,
         children: [
           Container(
-            color: Colors.redAccent,
             width: 150,
+            decoration: BoxDecoration(
+                color: Colors.red, borderRadius: BorderRadius.circular(100)),
+          ),
+          SizedBox(
+            width: 10,
           ),
           Container(
-            color: Colors.blueAccent,
             width: 150,
+            decoration: BoxDecoration(
+                color: Colors.blue, borderRadius: BorderRadius.circular(100)),
+          ),
+          SizedBox(
+            width: 10,
           ),
           Container(
-            color: Colors.green,
             width: 150,
+            decoration: BoxDecoration(
+                color: Colors.green, borderRadius: BorderRadius.circular(100)),
+          ),
+          SizedBox(
+            width: 10,
           ),
           Container(
-            color: Colors.amberAccent,
             width: 150,
+            decoration: BoxDecoration(
+                color: Colors.yellow, borderRadius: BorderRadius.circular(100)),
+          ),
+          SizedBox(
+            width: 10,
           ),
         ],
       ),

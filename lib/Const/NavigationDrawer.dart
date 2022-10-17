@@ -18,28 +18,49 @@ class NavigationDrawerWidget extends StatelessWidget {
             ),
             Card(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
+                  borderRadius: BorderRadius.circular(10)),
               margin: EdgeInsetsDirectional.all(1),
               color: Colors.grey.shade800,
               child: Column(
                 children: [
-                  Container(
-                    margin: EdgeInsets.all(2),
-                    height: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      shape: BoxShape.rectangle,
-                      border: Border.all(color: Colors.grey.shade800, width: 5),
-                      /*image: DecorationImage(
-                        image: AssetImage(
-                            "undraw_Problem_solving_re_4gq3 kopya.jpg"),
-                        fit: BoxFit.cover,
-                      ),*/
-                    ),
+                  Stack(
+                    alignment: Alignment.bottomLeft,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(2),
+                        height: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          shape: BoxShape.rectangle,
+                          border:
+                              Border.all(color: Colors.grey.shade800, width: 1),
+                          image: DecorationImage(
+                            image: NetworkImage(
+                                "https://images.pexels.com/photos/1025469/pexels-photo-1025469.jpeg?auto=compress&cs=tinysrgb&w=1600"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      const Positioned(
+                        bottom: 16,
+                        right: 16,
+                        left: 16,
+                        child: Text(
+                          "To Do List",
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
+//      ---------------0---------------
+
             const SizedBox(
               height: 16,
             ),
