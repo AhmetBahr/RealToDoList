@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:real_to_do_list/Const/routes.dart';
 
+import '../Pages/NotPage.dart';
+
 class NavigationDrawerWidget extends StatelessWidget {
   NavigationDrawerWidget({super.key});
 
@@ -69,9 +71,10 @@ class NavigationDrawerWidget extends StatelessWidget {
               color: Colors.black,
             ),
             buildMenuItem(
-                text: "Pro",
-                icon: Icons.account_balance_rounded,
-                onClicked: () {}),
+              text: "Pro",
+              icon: Icons.account_balance_rounded,
+              onClicked: () => selectedItem(context, 0),
+            ),
             const SizedBox(
               height: 5,
             ),
@@ -88,12 +91,14 @@ class NavigationDrawerWidget extends StatelessWidget {
             buildMenuItem(
                 text: "Yıldızlı Görevler",
                 icon: Icons.star_rounded,
-                onClicked: () {}),
+                onClicked: () => selectedItem(context, 1)),
             const SizedBox(
               height: 5,
             ),
             buildMenuItem(
-                text: "Kategori", icon: Icons.category, onClicked: () {}),
+                text: "Kategori",
+                icon: Icons.category,
+                onClicked: () => selectedItem(context, 2)),
             const SizedBox(
               height: 16,
             ),
@@ -106,26 +111,28 @@ class NavigationDrawerWidget extends StatelessWidget {
             buildMenuItem(
                 text: "Tema",
                 icon: Icons.brightness_medium_sharp,
-                onClicked: () {}),
+                onClicked: () => selectedItem(context, 3)),
             const SizedBox(
               height: 5,
             ),
             buildMenuItem(
-                text: "Bağış", icon: Icons.favorite, onClicked: () {}),
+                text: "Bağış",
+                icon: Icons.favorite,
+                onClicked: () => selectedItem(context, 4)),
             const SizedBox(
               height: 5,
             ),
             buildMenuItem(
                 text: "Geri Bildirim",
                 icon: Icons.border_color_outlined,
-                onClicked: () {}),
+                onClicked: () => selectedItem(context, 5)),
             const SizedBox(
               height: 5,
             ),
             buildMenuItem(
                 text: "Ayarlar",
                 icon: Icons.settings_rounded,
-                onClicked: () {}),
+                onClicked: () => selectedItem(context, 6)),
           ],
         ),
       ),
@@ -152,5 +159,29 @@ class NavigationDrawerWidget extends StatelessWidget {
       hoverColor: hoverColor,
       onTap: () {},
     );
+  }
+}
+
+void selectedItem(BuildContext context, int index) {
+  Navigator.of(context).pop();
+  switch (index) {
+    case 0:
+      Navigator.of(context).push(MaterialPageRoute(
+        builder:
+            (context) => /* BURAYA GIDILCEK SAYFA */ NotPage(), //Bu deneme için kondu
+      ));
+      break;
+    case 1:
+      break;
+    case 2:
+      break;
+    case 3:
+      break;
+    case 4:
+      break;
+    case 5:
+      break;
+    case 6:
+      break;
   }
 }

@@ -5,7 +5,11 @@ Widget MyActionButton() => Container(
       width: 70,
       padding: EdgeInsets.zero,
       child: FittedBox(
-        child: FloatingActionButton(child: Icon(Icons.add), onPressed: () {}),
+        child: FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () {
+              print("Presed");
+            }),
       ),
     );
 
