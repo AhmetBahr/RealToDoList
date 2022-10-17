@@ -78,16 +78,7 @@ class NavigationDrawerWidget extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            buildMenuItem(
-                text: "Giriş",
-                icon: Icons.account_balance_rounded,
-                onClicked: () {
-                  //Navigator.of(context).pushNamedAndRemoveUntil(loginRoute, (route) => false);
-                  print("?");
-                }),
-            const SizedBox(
-              height: 5,
-            ),
+
             buildMenuItem(
                 text: "Yıldızlı Görevler",
                 icon: Icons.star_rounded,
@@ -133,6 +124,13 @@ class NavigationDrawerWidget extends StatelessWidget {
                 text: "Ayarlar",
                 icon: Icons.settings_rounded,
                 onClicked: () => selectedItem(context, 6)),
+            buildMenuItem(
+                text: "Profile",
+                icon: Icons.people_alt_rounded,
+                onClicked: () => selectedItem(context, 7)),
+            const SizedBox(
+              height: 5,
+            ),
           ],
         ),
       ),
@@ -188,6 +186,10 @@ void selectedItem(BuildContext context, int index) {
       break;
     case 6:
       print("Presed 6");
+      break;
+    case 7:
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(loginRoute, (route) => false);
       break;
   }
 }
