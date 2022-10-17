@@ -9,10 +9,10 @@ class NotPage extends StatefulWidget {
   const NotPage({super.key});
 
   @override
-  State<NotPage> createState() => _NotePage();
+  State<NotPage> createState() => NotePage();
 }
 
-class _NotePage extends State<NotPage> {
+class NotePage extends State<NotPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
