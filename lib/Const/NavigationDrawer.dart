@@ -157,7 +157,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         style: TextStyle(color: color),
       ),
       hoverColor: hoverColor,
-      onTap: () {},
+      onTap: onClicked,
     );
   }
 }
@@ -172,16 +172,22 @@ void selectedItem(BuildContext context, int index) {
       ));
       break;
     case 1:
+      print("Presed 1");
       break;
     case 2:
+      print("Presed 2");
       break;
     case 3:
+      print("Presed 3");
       break;
     case 4:
+      print("Presed 4");
       break;
     case 5:
+      print("Presed 5");
       break;
     case 6:
+      print("Presed 6");
       break;
   }
 }
