@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import '../Const/MidActionButton.dart';
 import '../Const/MyActionButton.dart';
 import '../Const/NavigationDrawer.dart';
+import '../Const/NotesBody.dart';
+import '../Const/Text_In_NotePage.dart';
+import '../Const/Text_Subtitle.dart';
 import '../Const/TopCategory.dart';
+import 'package:flutter/src/rendering/box.dart';
 
 class NotPage extends StatefulWidget {
   const NotPage({super.key});
@@ -23,7 +27,7 @@ class NotePage extends State<NotPage> {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
-                  'https://images.unsplash.com/photo-1541472555878-357a209eb293?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1885&q=80'),
+                  'https://images.pexels.com/photos/13866617/pexels-photo-13866617.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  '),
               fit: BoxFit.cover,
             ),
           ),
@@ -31,38 +35,8 @@ class NotePage extends State<NotPage> {
             children: [
               TopCategory(),
               const Divider(),
-              Container(
-                child: Text(
-                  "Morning",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                    fontSize: 50,
-                  ),
-                ),
-                height: 60,
-              ),
-              Container(
-                child: Text(
-                  "To Do List",
-                  style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    color: Colors.white,
-                    fontSize: 30,
-                  ),
-                ),
-                height: 60,
-              ),
-              const Divider(),
-              Container(
-                height: 80,
-                decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(100)),
-              ),
-              SizedBox(
-                height: 10,
-              ),
+              TextInNotePage(),
+              TextSubtitle(),
             ],
           ),
         ),
@@ -70,71 +44,3 @@ class NotePage extends State<NotPage> {
     );
   }
 }
-
-
-
-
-/*          Container(
-              child: Text(
-                "To day I do",
-                style: TextStyle(fontSize: 30),
-              ),
-              height: 60,
-            ),
-            const Divider(),
-            Container(
-              color: Colors.green,
-              height: 80,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              color: Colors.red,
-              height: 80,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              color: Colors.blue,
-              height: 80,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              color: Colors.pink,
-              height: 80,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              color: Colors.green,
-              height: 80,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              color: Colors.red,
-              height: 80,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              color: Colors.blue,
-              height: 80,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              color: Colors.pink,
-              height: 80,
-            ),
-            SizedBox(
-              height: 10,
-            ), */
