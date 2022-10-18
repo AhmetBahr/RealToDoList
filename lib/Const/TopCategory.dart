@@ -19,7 +19,20 @@ class _TopCategoryState extends State<TopCategory> {
           Container(
             width: 150,
             decoration: BoxDecoration(
-                color: Colors.red, borderRadius: BorderRadius.circular(100)),
+              color: Colors.blue.withOpacity(0.4),
+              borderRadius: BorderRadius.circular(100),
+            ),
+            // ignore: prefer_const_constructors
+            child: Text(
+              'Daily',
+              maxLines: 3,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
           ),
           SizedBox(
             width: 10,
@@ -27,7 +40,20 @@ class _TopCategoryState extends State<TopCategory> {
           Container(
             width: 150,
             decoration: BoxDecoration(
-                color: Colors.blue, borderRadius: BorderRadius.circular(100)),
+              color: Colors.yellow.withOpacity(0.4),
+              borderRadius: BorderRadius.circular(100),
+            ),
+            // ignore: prefer_const_constructors
+            child: Text(
+              'Shop',
+              maxLines: 3,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
           ),
           SizedBox(
             width: 10,
@@ -35,7 +61,20 @@ class _TopCategoryState extends State<TopCategory> {
           Container(
             width: 150,
             decoration: BoxDecoration(
-                color: Colors.green, borderRadius: BorderRadius.circular(100)),
+              color: Colors.green.withOpacity(0.4),
+              borderRadius: BorderRadius.circular(100),
+            ),
+            // ignore: prefer_const_constructors
+            child: Text(
+              'school',
+              maxLines: 3,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
           ),
           SizedBox(
             width: 10,
@@ -43,7 +82,20 @@ class _TopCategoryState extends State<TopCategory> {
           Container(
             width: 150,
             decoration: BoxDecoration(
-                color: Colors.yellow, borderRadius: BorderRadius.circular(100)),
+              color: Colors.pink.withOpacity(0.4),
+              borderRadius: BorderRadius.circular(100),
+            ),
+            // ignore: prefer_const_constructors
+            child: Text(
+              'Patates',
+              maxLines: 3,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
           ),
           SizedBox(
             width: 10,
