@@ -11,60 +11,90 @@ class _NotesBodyState extends State<NotesBody> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      height: 1000,
       child: ListView(
+        padding: EdgeInsets.all(8),
         children: [
           Container(
-            color: Colors.green,
-            height: 80,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.pink.withOpacity(0.7),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            // ignore: prefer_const_constructors
+            child: Text(
+              '  Patates',
+              maxLines: 3,
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
           ),
           SizedBox(
             height: 10,
           ),
           Container(
-            color: Colors.red,
-            height: 80,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.green.withOpacity(0.7),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            // ignore: prefer_const_constructors
+            child: Text(
+              '  Soğan',
+              maxLines: 3,
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
           ),
           SizedBox(
             height: 10,
           ),
           Container(
-            color: Colors.blue,
-            height: 80,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.blue.withOpacity(0.7),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            // ignore: prefer_const_constructors
+            child: Text(
+              '  Salatalık',
+              maxLines: 3,
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
           ),
           SizedBox(
             height: 10,
           ),
           Container(
-            color: Colors.pink,
-            height: 80,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            color: Colors.green,
-            height: 80,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            color: Colors.red,
-            height: 80,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            color: Colors.blue,
-            height: 80,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            color: Colors.pink,
-            height: 80,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.yellow.withOpacity(0.7),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            // ignore: prefer_const_constructors
+            child: Text(
+              '  Domates',
+              maxLines: 3,
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
           ),
           SizedBox(
             height: 10,
