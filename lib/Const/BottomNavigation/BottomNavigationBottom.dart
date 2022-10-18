@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../Pages/NotPage.dart';
+import '../../Pages/NotePage.dart';
 
 class MyBottomBar extends StatefulWidget {
   @override
