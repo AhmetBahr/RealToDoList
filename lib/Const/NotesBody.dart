@@ -39,7 +39,7 @@ class _NotesBodyState extends State<NotesBody> {
           Container(
             height: 40,
             decoration: BoxDecoration(
-              color: Colors.green.withOpacity(0.7),
+              color: Colors.green.withOpacity(0.55),
               borderRadius: BorderRadius.circular(10),
             ),
             // ignore: prefer_const_constructors
