@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:real_to_do_list/Const/routes.dart';
 
 import '../Pages/NotePage.dart';
+import '../Pages/SettingsPages/setting_pages.dart';
+import '../Pages/ThemaPage.dart';
+import '../Pages/login_view.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   NavigationDrawerWidget({super.key});
@@ -176,7 +179,10 @@ void selectedItem(BuildContext context, int index) {
       print("Presed 2");
       break;
     case 3:
-      print("Presed 3");
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => ThmemePage(),
+      ));
+
       break;
     case 4:
       print("Presed 4");
@@ -185,11 +191,21 @@ void selectedItem(BuildContext context, int index) {
       print("Presed 5");
       break;
     case 6:
-      print("Presed 6");
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => SettingsOnePage(),
+      ));
+
       break;
     case 7:
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(loginRoute, (route) => false);
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => LoginView(),
+      ));
       break;
   }
 }
+
+
+/*
+ Navigator.of(context)
+          .pushNamedAndRemoveUntil(loginRoute, (route) => false);
+          */
