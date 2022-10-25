@@ -96,9 +96,7 @@ class NavigationDrawerWidget extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            const Divider(
-              color: Colors.black,
-            ),
+            const Divider(),
             const SizedBox(
               height: 5,
             ),
@@ -143,7 +141,7 @@ class NavigationDrawerWidget extends StatelessWidget {
   Widget buildMenuItem({
     required String text,
     required IconData icon,
-    VoidCallback? onClicked,
+    onClicked, //voidCallBack? onClicked  anlamadım düzeldi
   }) {
     final color = Colors.grey[700];
     final hoverColor = Colors.white;
