@@ -7,7 +7,7 @@ class SettingsOnePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         title: Text(
           'Ayarlar',
           style: TextStyle(

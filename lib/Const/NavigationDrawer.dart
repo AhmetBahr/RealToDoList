@@ -41,8 +41,8 @@ class NavigationDrawerWidget extends StatelessWidget {
                           border:
                               Border.all(color: Colors.grey.shade800, width: 1),
                           image: DecorationImage(
-                            image: NetworkImage(
-                                "https://images.pexels.com/photos/1025469/pexels-photo-1025469.jpeg?auto=compress&cs=tinysrgb&w=1600"),
+                            image: AssetImage(
+                                "asset/svg/undraw_Problem_solving_re_4gq3 kopya.jpg"),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -55,7 +55,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                           "To Do List",
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20,
                           ),
                         ),

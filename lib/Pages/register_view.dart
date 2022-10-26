@@ -33,6 +33,10 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
+    final text = MediaQuery.of(context).platformBrightness == Brightness.dark
+        ? 'DarkTheme'
+        : 'LightTheme';
+
     return Scaffold(
         /*    appBar: AppBar(
         title: const Text("Register"),
@@ -46,14 +50,13 @@ class _RegisterViewState extends State<RegisterView> {
         ]
       ),*/
         appBar: AppBar(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          //  shape:
+          //      RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           title: Text(
             ' Register Now',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Colors.blue.shade800,
             ),
           ),
         ),

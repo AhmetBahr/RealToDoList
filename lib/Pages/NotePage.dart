@@ -29,12 +29,12 @@ class _NotePage extends State<NotePage> {
     return Scaffold(
       floatingActionButton: MyActionButton(),
       drawer: NavigationDrawerWidget(),
+      backgroundColor: Colors.white,
       body: SizedBox(
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(
-                  'https://images.pexels.com/photos/13866617/pexels-photo-13866617.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  '),
+              image: AssetImage("asset/svg/pexels-photo-13866617.jpeg"),
               fit: BoxFit.cover,
             ),
           ),
@@ -94,3 +94,19 @@ class _NotePage extends State<NotePage> {
     );
   }
 }
+
+
+
+
+/* 
+
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(
+                  'https://images.pexels.com/photos/13866617/pexels-photo-13866617.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  '),
+              fit: BoxFit.cover,
+            ),
+          ),
+
+          */
