@@ -32,6 +32,10 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    final text = MediaQuery.of(context).platformBrightness == Brightness.dark
+        ? 'DarkTheme'
+        : 'LightTheme';
+
     return Scaffold(
       /* appBar: AppBar(
       title: const Text("Login"),
@@ -45,13 +49,12 @@ class _LoginViewState extends State<LoginView> {
       ]
     ),*/
       appBar: AppBar(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         title: Text(
           'Login',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Colors.blue.shade800,
           ),
         ),
       ),
