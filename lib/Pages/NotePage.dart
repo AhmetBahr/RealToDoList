@@ -28,22 +28,22 @@ class _NotePage extends State<NotePage> {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context, 
-            builder: (context){
-              return const AlertDialog(
-                title: Text("Create New Item"),
-                content: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Type here..."
-                  ),
-                )
-              );
-            }
-          );
-        },
-      ),
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context){
+                return const AlertDialog(
+                  title: Text("Create New Item"),
+                  content: TextField(
+                    decoration: InputDecoration(
+                      hintText: "Type here..."
+                    ),
+                  )
+                );
+              }
+            );
+          },
+        ),
       drawer: NavigationDrawerWidget(),
       backgroundColor: Colors.white,
       body: SizedBox(
