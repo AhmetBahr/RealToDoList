@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Const/theme_Change.dart';
+import '../Const/OldTheme/theme_Change.dart';
 import '../main.dart';
 
 class ThmemePage extends StatelessWidget {
@@ -13,10 +13,9 @@ class ThmemePage extends StatelessWidget {
         : 'LightTheme';
 
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.orange.withOpacity(0.0),
-          title: Text(MyApp.titlee),
-          actions: [ChangeThemeButtonWidget()]),
+      appBar: AppBar(backgroundColor: Colors.orange.withOpacity(0.0),
+          //  title: Text(MyApp.titlee),
+          actions: []),
       body: ListView(
         children: [
           SizedBox(

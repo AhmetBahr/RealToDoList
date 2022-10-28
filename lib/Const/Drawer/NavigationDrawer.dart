@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:real_to_do_list/Const/routes.dart';
 
-import '../Pages/NotePage.dart';
-import '../Pages/SettingsPages/setting_pages.dart';
-import '../Pages/ThemaPage.dart';
-import '../Pages/login_view.dart';
+import '../../Pages/NotePage.dart';
+import '../../Pages/SettingsPages/setting_pages.dart';
+import '../../Pages/Old_ThemaPage.dart';
+import '../../Pages/Theme_Settings_Page.dart';
+import '../../Pages/login_view.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   NavigationDrawerWidget({super.key});
@@ -178,7 +179,7 @@ void selectedItem(BuildContext context, int index) {
       break;
     case 3:
       Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => ThmemePage(),
+        builder: (context) => SettingsPage(),
       ));
 
       break;

@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:real_to_do_list/Const/thmema_provader.dart';
+import 'package:real_to_do_list/presentation/pr/Models/Styles/app_themes.dart';
+import 'package:real_to_do_list/storage/service_locator.dart';
+import 'package:real_to_do_list/storage/storage_service.dart';
 
 import 'Const/BottomNavigation/BottomNavigationBottom.dart';
 
@@ -10,13 +14,65 @@ import 'package:real_to_do_list/Pages/register_view.dart';
 import 'package:real_to_do_list/Pages/verify_email_view.dart';
 import 'package:real_to_do_list/Const/routes.dart';
 
+import 'Const/NewTheme/Theme_provider.dart';
+import 'Const/OldTheme/thmema_provader.dart';
 import 'Pages/NotePage.dart';
-import 'Pages/ThemaPage.dart';
+import 'Pages/Old_ThemaPage.dart';
+import 'Pages/Theme_Settings_Page.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+void main() {
+  runZonedGuarded<Future<void>>(() async {
+    setUpServiceLocator();
+
+    final StorageService storageService = getIt<StorageService>();
+    await storageService.init();
+
+    runApp(MyApp(
+      storageService: storageService,
+    ));
+  }, (e, _) => throw e);
 }
+
+class MyApp extends StatelessWidget {
+  const MyApp({
+    Key? key,
+    required this.storageService,
+  }) : super(key: key);
+
+  final StorageService storageService;
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ThemeProvider(storageService),
+        ),
+      ],
+      child: Consumer<ThemeProvider>(
+        child: const NotePage(), //Main sayfaya burdan erişiyoruz
+        builder: (c, themeProvider, home) => MaterialApp(
+          title: 'Flutter Theme And Primary Color Switcher',
+          debugShowCheckedModeBanner: false,
+          theme: AppThemes.main(
+            primaryColor: themeProvider.selectedPrimaryColor,
+          ),
+          darkTheme: AppThemes.main(
+            isDark: true,
+            primaryColor: themeProvider.selectedPrimaryColor,
+          ),
+          themeMode: themeProvider.selectedThemeMode,
+          home: home,
+        ),
+      ),
+    );
+  }
+}
+
+
+//Önceki Seferki Main
+
+/*
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -46,3 +102,5 @@ class MyApp extends StatelessWidget {
         },
       );
 }
+
+*/

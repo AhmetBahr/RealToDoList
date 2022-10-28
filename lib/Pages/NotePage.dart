@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:real_to_do_list/main.dart';
 
-import '../Const/MidActionButton.dart';
-import '../Const/MyActionButton.dart';
-import '../Const/NavigationDrawer.dart';
-import '../Const/NotesBody.dart';
-import '../Const/Text_In_NotePage.dart';
-import '../Const/Text_Subtitle.dart';
-import '../Const/TopCategory.dart';
-import 'package:flutter/src/rendering/box.dart';
+import '../Const/Drawer/NavigationDrawer.dart';
 
-import '../Const/theme_Change.dart';
+import '../Const/Notes/TopCategory.dart';
+import '../Const/Text/Text_In_NotePage.dart';
+import '../Const/Text/Text_Subtitle.dart';
+import 'package:flutter/src/rendering/box.dart';
 
 class NotePage extends StatefulWidget {
   const NotePage({super.key});
@@ -28,30 +24,27 @@ class _NotePage extends State<NotePage> {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showDialog(
+        onPressed: () {
+          showDialog(
               context: context,
-              builder: (context){
+              builder: (context) {
                 return const AlertDialog(
-                  title: Text("Create New Item"),
-                  content: TextField(
-                    decoration: InputDecoration(
-                      hintText: "Type here..."
-                    ),
-                  )
-                );
-              }
-            );
-          },
-        ),
+                    title: Text("Create New Item"),
+                    content: TextField(
+                      decoration: InputDecoration(hintText: "Type here..."),
+                    ));
+              });
+        },
+      ),
       drawer: NavigationDrawerWidget(),
       backgroundColor: Colors.white,
       body: SizedBox(
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("asset/svg/pexels-photo-13866617.jpeg"),
-              fit: BoxFit.cover,
+              image: AssetImage("asset/svg/undraw_Annotation_re_h774.png"),
+              //fit: BoxFit.cover,
+              fit: BoxFit.contain,
             ),
           ),
           child: ListView(
@@ -64,7 +57,7 @@ class _NotePage extends State<NotePage> {
               Container(
                 height: 40,
                 decoration: BoxDecoration(
-                  color: Colors.pink.withOpacity(0.4),
+                  color: Colors.pink.withOpacity(0.7),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 // ignore: prefer_const_constructors
