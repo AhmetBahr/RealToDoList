@@ -19,7 +19,7 @@ class _TopCategoryState extends State<TopCategory> {
           Container(
             width: 150,
             decoration: BoxDecoration(
-              color: Colors.blue.withOpacity(0.4),
+              color: Colors.blue.withOpacity(0.7),
               borderRadius: BorderRadius.circular(100),
             ),
             // ignore: prefer_const_constructors
@@ -40,7 +40,7 @@ class _TopCategoryState extends State<TopCategory> {
           Container(
             width: 150,
             decoration: BoxDecoration(
-              color: Colors.yellow.withOpacity(0.4),
+              color: Colors.yellow.withOpacity(0.7),
               borderRadius: BorderRadius.circular(100),
             ),
             // ignore: prefer_const_constructors
@@ -61,7 +61,7 @@ class _TopCategoryState extends State<TopCategory> {
           Container(
             width: 150,
             decoration: BoxDecoration(
-              color: Colors.green.withOpacity(0.4),
+              color: Colors.green.withOpacity(0.7),
               borderRadius: BorderRadius.circular(100),
             ),
             // ignore: prefer_const_constructors
@@ -82,7 +82,7 @@ class _TopCategoryState extends State<TopCategory> {
           Container(
             width: 150,
             decoration: BoxDecoration(
-              color: Colors.pink.withOpacity(0.4),
+              color: Colors.pink.withOpacity(0.7),
               borderRadius: BorderRadius.circular(100),
             ),
             // ignore: prefer_const_constructors
