@@ -16,7 +16,7 @@ class NavigationDrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: Colors.deepPurple[100],
+        // color: Colors.deepPurple[100],
         child: ListView(
           padding: padding,
           children: <Widget>[
@@ -94,13 +94,11 @@ class NavigationDrawerWidget extends StatelessWidget {
                 text: "Kategori",
                 icon: Icons.category,
                 onClicked: () => selectedItem(context, 2)),
-            const SizedBox(
-              height: 16,
+
+            const Divider(
+              color: Colors.black,
             ),
-            const Divider(),
-            const SizedBox(
-              height: 5,
-            ),
+
             buildMenuItem(
                 text: "Tema",
                 icon: Icons.brightness_medium_sharp,

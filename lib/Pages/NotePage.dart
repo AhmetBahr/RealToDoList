@@ -22,8 +22,12 @@ class _NotePage extends State<NotePage> {
         ? 'DarkTheme'
         : 'LightTheme';
 
+    primaryBackOptions();
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        foregroundColor: Colors.black,
+        child: Icon(Icons.add),
         onPressed: () {
           showDialog(
               context: context,
@@ -37,12 +41,11 @@ class _NotePage extends State<NotePage> {
         },
       ),
       drawer: NavigationDrawerWidget(),
-      backgroundColor: Colors.white,
       body: SizedBox(
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("asset/svg/undraw_Annotation_re_h774.png"),
+              image: AssetImage("asset/svg/unlem.png"),
               //fit: BoxFit.cover,
               fit: BoxFit.contain,
             ),
@@ -51,10 +54,16 @@ class _NotePage extends State<NotePage> {
             children: [
               // ignore: prefer_const_constructors
               TopCategory(),
-              const Divider(),
+              const Divider(
+                color: Colors.black,
+              ),
               TextInNotePage(),
               TextSubtitle(),
+              const Divider(
+                color: Colors.black,
+              ),
               Container(
+                margin: EdgeInsets.all(5),
                 height: 40,
                 decoration: BoxDecoration(
                   color: Colors.pink.withOpacity(0.7),
@@ -68,30 +77,6 @@ class _NotePage extends State<NotePage> {
                   // ignore: prefer_const_constructors
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-              // ignore: prefer_const_constructors
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.pink.withOpacity(0.7),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                // ignore: prefer_const_constructors
-                child: Text(
-                  '  Patates',
-                  maxLines: 3,
-                  textAlign: TextAlign.start,
-                  // ignore: prefer_const_constructors
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
                     fontSize: 20,
                   ),
                 ),

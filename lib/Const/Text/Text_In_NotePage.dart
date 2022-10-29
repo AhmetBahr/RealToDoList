@@ -15,7 +15,6 @@ class _TextInNotePageState extends State<TextInNotePage> {
         " Morning",
         style: TextStyle(
           fontWeight: FontWeight.w500,
-          color: Colors.white,
           fontSize: 50,
         ),
       ),

@@ -29,7 +29,6 @@ class _TopCategoryState extends State<TopCategory> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
-                color: Colors.white,
                 fontSize: 20,
               ),
             ),
@@ -50,7 +49,6 @@ class _TopCategoryState extends State<TopCategory> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
-                color: Colors.white,
                 fontSize: 20,
               ),
             ),
@@ -71,7 +69,6 @@ class _TopCategoryState extends State<TopCategory> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
-                color: Colors.white,
                 fontSize: 20,
               ),
             ),
@@ -92,7 +89,6 @@ class _TopCategoryState extends State<TopCategory> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
-                color: Colors.white,
                 fontSize: 20,
               ),
             ),
