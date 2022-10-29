@@ -28,7 +28,6 @@ class _NotesBodyState extends State<NotesBody> {
               textAlign: TextAlign.start,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
-                color: Colors.white,
                 fontSize: 20,
               ),
             ),

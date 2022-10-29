@@ -15,7 +15,6 @@ class _TextSubtitleState extends State<TextSubtitle> {
         "  To Do List",
         style: TextStyle(
           fontWeight: FontWeight.normal,
-          color: Colors.white,
           fontSize: 30,
         ),
       ),
