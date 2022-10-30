@@ -26,7 +26,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -51,19 +54,9 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAj5PnrCLSqp0ESzIWx1qGP6nxuwuWlsjA',
-    appId: '1:879595794441:android:5bc41bbbdbc7a7f511c8d8',
+    appId: '1:879595794441:android:3ea6ac1b11f7bb5311c8d8',
     messagingSenderId: '879595794441',
     projectId: 'makindanotes',
     storageBucket: 'makindanotes.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDI-vogaAfUSvHfv6PC3GDVnH9GJ1bXG7k',
-    appId: '1:879595794441:ios:587b3d7d62c86b9611c8d8',
-    messagingSenderId: '879595794441',
-    projectId: 'makindanotes',
-    storageBucket: 'makindanotes.appspot.com',
-    iosClientId: '879595794441-ah35b11dlg1ib7poao7ljfjhggollrja.apps.googleusercontent.com',
-    iosBundleId: 'xyz.makindagames.mynotes',
   );
 }

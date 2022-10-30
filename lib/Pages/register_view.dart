@@ -3,7 +3,7 @@ import 'package:real_to_do_list/Const/routes.dart';
 import 'package:real_to_do_list/services/auth/auth_exceptions.dart';
 import 'package:real_to_do_list/services/auth/auth_service.dart';
 import 'package:real_to_do_list/utilities/show_error_dialog.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'login_view.dart';
 
 class RegisterView extends StatefulWidget {
@@ -19,6 +19,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   void initState() {
+    Firebase.initializeApp().whenComplete(() => print("INITIALIZEDD"));
     _email = TextEditingController();
     _password = TextEditingController();
     super.initState();

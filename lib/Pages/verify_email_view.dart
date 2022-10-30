@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:real_to_do_list/Const/routes.dart';
 import 'package:real_to_do_list/services/auth/auth_service.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class VerifyEmailView extends StatefulWidget{
   const VerifyEmailView ({ Key? key }) : super(key: key);
@@ -10,6 +11,12 @@ class VerifyEmailView extends StatefulWidget{
 }
 
 class _StateVerifyEmailView extends State<VerifyEmailView>{
+  @override
+  void initState() {
+    Firebase.initializeApp().whenComplete(() => print("INITIALIZED"));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context){
     return Scaffold(

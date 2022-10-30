@@ -20,6 +20,11 @@ dependencies:
   provider: ^6.0.4
   hive_flutter: ^1.1.0
   get_it: ^7.2.0
+  firebase_core: ^1.24.0
+  firebase_analytics: ^9.3.8
+  cloud_firestore: ^3.5.1
+  sqflite: ^2.2.0+2
+  path: ^1.8.2
 
 dev_dependencies:
   flutter_test:

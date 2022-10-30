@@ -4,6 +4,7 @@ import 'package:real_to_do_list/Pages/register_view.dart';
 import 'package:real_to_do_list/services/auth/auth_exceptions.dart';
 import 'package:real_to_do_list/services/auth/auth_service.dart';
 import 'package:real_to_do_list/utilities/show_error_dialog.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   void initState() {
+    Firebase.initializeApp().whenComplete(() => print("INITIALIZED"));
     _email = TextEditingController();
     _password = TextEditingController();
     super.initState();

@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "879595794441",
+    "project_id": "makindanotes",
+    "storage_bucket": "makindanotes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879595794441:android:5daaceacedd9f28e11c8d8",
+        "android_client_info": {
+          "package_name": "com.example.denemeulandeneme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879595794441-u32rjf8keuepn4o0o2831saolsgou4pe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj5PnrCLSqp0ESzIWx1qGP6nxuwuWlsjA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "879595794441-u32rjf8keuepn4o0o2831saolsgou4pe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "879595794441-ah35b11dlg1ib7poao7ljfjhggollrja.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "xyz.makindagames.mynotes"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879595794441:android:3ea6ac1b11f7bb5311c8d8",
+        "android_client_info": {
+          "package_name": "com.example.real_to_do_list"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879595794441-u32rjf8keuepn4o0o2831saolsgou4pe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj5PnrCLSqp0ESzIWx1qGP6nxuwuWlsjA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "879595794441-u32rjf8keuepn4o0o2831saolsgou4pe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "879595794441-ah35b11dlg1ib7poao7ljfjhggollrja.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "xyz.makindagames.mynotes"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879595794441:android:5bc41bbbdbc7a7f511c8d8",
+        "android_client_info": {
+          "package_name": "xyz.makindagames.mynotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879595794441-u32rjf8keuepn4o0o2831saolsgou4pe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj5PnrCLSqp0ESzIWx1qGP6nxuwuWlsjA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "879595794441-u32rjf8keuepn4o0o2831saolsgou4pe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "879595794441-ah35b11dlg1ib7poao7ljfjhggollrja.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "xyz.makindagames.mynotes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -20,6 +20,8 @@ import 'Pages/NotePage.dart';
 import 'Pages/Old_ThemaPage.dart';
 import 'Pages/Theme_Settings_Page.dart';
 
+import 'package:real_to_do_list/Pages/new_note_view.dart';
+
 void main() {
   runZonedGuarded<Future<void>>(() async {
     setUpServiceLocator();
@@ -63,6 +65,14 @@ class MyApp extends StatelessWidget {
           ),
           themeMode: themeProvider.selectedThemeMode,
           home: home,
+          routes: {
+                    loginRoute: (context) => const LoginView(),
+                              registerRoute: (context) => const RegisterView(),
+                                                  verifyEmailRoute: (context) => const
+                                                      VerifyEmailView(),
+                                                            newNoteRoute: (context) => const
+                                                                NewNoteView(),
+                                                                    },
         ),
       ),
     );

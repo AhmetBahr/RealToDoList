@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/app_theme.dart';
+import '../../Models/app_theme.dart';
 
 class ThemeOption extends StatelessWidget {
   const ThemeOption({
