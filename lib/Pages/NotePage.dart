@@ -21,23 +21,24 @@ class NotePage extends StatefulWidget {
 }
 
 class _NotePage extends State<NotePage> {
-  late final NotesService _notesService;
+  late final NotesService _noteService;
   String get userEmail => AuthService.firebase().currentUser!.email!;
+
+  @override
+  void initState() {
+    _noteService = NotesService();
+    _noteService.open();
+    Firebase.initializeApp().whenComplete(() { 
+      setState(() {});
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final text = MediaQuery.of(context).platformBrightness == Brightness.dark
         ? 'DarkTheme'
         : 'LightTheme';
-
-    @override
-    void initState() {
-      super.initState();
-      Firebase.initializeApp().whenComplete(() {
-        print("completed");
-        setState(() {});
-      });
-    }
 
     //primaryBackOptions();
 
@@ -62,13 +63,13 @@ class _NotePage extends State<NotePage> {
         },
       ),
       drawer: NavigationDrawerWidget(),
-      body: /* FutureBuilder( 
-          future: _notesService.getOrCreateUser(email: userEmail),
+      body:/* FutureBuilder( 
+          future: _noteService.getOrCreateUser(email: userEmail),
           builder: (context, snapshot) {
             switch(snapshot.connectionState){
               case ConnectionState.done:
                 return StreamBuilder(
-                  stream: _notesService.allNotes,
+                  stream: _noteService.allNotes,
                   builder: (context, snapshot) {
                     switch(snapshot.connectionState){
                       case ConnectionState.waiting:
@@ -78,7 +79,7 @@ class _NotePage extends State<NotePage> {
                           return NotesListView(
                             notes: allNotes, 
                             onDeleteNote: (note) async {
-                              await _notesService.deleteNote(id: note.id);
+                              await _noteService.deleteNote(id: note.id);
                             }
                           );
                         } else {
@@ -94,7 +95,7 @@ class _NotePage extends State<NotePage> {
             }
           }
         )*/
-          SizedBox(
+        SizedBox(
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -103,8 +104,40 @@ class _NotePage extends State<NotePage> {
               fit: BoxFit.contain,
             ),
           ),
-          child: ListView(
-            children: [
+          child: FutureBuilder(
+            future: _noteService.getOrCreateUser(email: userEmail),
+            builder: (context, snapshot) {
+              switch(snapshot.connectionState){
+                case ConnectionState.done:
+                  return StreamBuilder(
+                    stream: _noteService.allNotes,
+                    builder: (context, snapshot) {
+                      switch(snapshot.connectionState){
+                        case ConnectionState.waiting:
+                        case ConnectionState.active:
+                          if (snapshot.hasData){
+                            final allNotes = snapshot.data as List<DatabaseNote>;
+                            return NotesListView(
+                              notes: allNotes, 
+                              onDeleteNote: (note) async {
+                                await _noteService.deleteNote(id: note.id);
+                              }
+                            );
+                          } else {
+                            return const CircularProgressIndicator();
+                          }
+                        default:     
+                          return const CircularProgressIndicator();
+                      }
+                    }
+                  );
+                default:  
+                  return const CircularProgressIndicator();
+              }
+            }
+          ) 
+        )
+        /*    //ESKI SizedBox içi
               // ignore: prefer_const_constructors
               TopCategory(),
               const Divider(
@@ -133,12 +166,11 @@ class _NotePage extends State<NotePage> {
                     fontSize: 20,
                   ),
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
+              ),*/
+      )
     );
+
+
   }
 }
 
