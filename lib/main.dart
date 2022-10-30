@@ -66,13 +66,12 @@ class MyApp extends StatelessWidget {
           themeMode: themeProvider.selectedThemeMode,
           home: home,
           routes: {
-                    loginRoute: (context) => const LoginView(),
-                              registerRoute: (context) => const RegisterView(),
-                                                  verifyEmailRoute: (context) => const
-                                                      VerifyEmailView(),
-                                                            newNoteRoute: (context) => const
-                                                                NewNoteView(),
-                                                                    },
+            // themeaPagee: (context) => const ThmemePage(),
+            loginRoute: (context) => const LoginView(),
+            registerRoute: (context) => const RegisterView(),
+            verifyEmailRoute: (context) => const VerifyEmailView(),
+            newNoteRoute: (context) => const NewNoteView(),
+          },
         ),
       ),
     );

@@ -33,11 +33,12 @@ class _NotePage extends State<NotePage> {
     @override
     void initState() {
       super.initState();
-      Firebase.initializeApp().whenComplete(() { 
+      Firebase.initializeApp().whenComplete(() {
         print("completed");
         setState(() {});
       });
     }
+
     //primaryBackOptions();
 
     return Scaffold(
@@ -61,7 +62,7 @@ class _NotePage extends State<NotePage> {
         },
       ),
       drawer: NavigationDrawerWidget(),
-      body:/* FutureBuilder( 
+      body: /* FutureBuilder( 
           future: _notesService.getOrCreateUser(email: userEmail),
           builder: (context, snapshot) {
             switch(snapshot.connectionState){
@@ -93,7 +94,7 @@ class _NotePage extends State<NotePage> {
             }
           }
         )*/
-        SizedBox(
+          SizedBox(
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -138,8 +139,6 @@ class _NotePage extends State<NotePage> {
         ),
       ),
     );
-
-
   }
 }
 
