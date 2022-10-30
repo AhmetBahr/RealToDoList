@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../ActionButton/MidActionButton.dart';
+
 class TopCategory extends StatefulWidget {
   const TopCategory({super.key});
 
@@ -16,10 +18,33 @@ class _TopCategoryState extends State<TopCategory> {
         padding: EdgeInsets.all(8),
         scrollDirection: Axis.horizontal,
         children: [
-          Container(
+          Row(
+            children: [
+              MyMidActonButton(),
+              SizedBox(
+                width: 10,
+              ),
+              MyMidActonButton(),
+              SizedBox(
+                width: 10,
+              ),
+              MyMidActonButton(),
+              SizedBox(
+                width: 10,
+              ),
+              MyMidActonButton(),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/*
+ Container(
             width: 150,
             decoration: BoxDecoration(
-              color: Colors.blue.withOpacity(0.7),
               borderRadius: BorderRadius.circular(100),
             ),
             // ignore: prefer_const_constructors
@@ -96,8 +121,5 @@ class _TopCategoryState extends State<TopCategory> {
           SizedBox(
             width: 10,
           ),
-        ],
-      ),
-    );
-  }
-}
+         
+*/
