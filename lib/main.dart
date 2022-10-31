@@ -52,7 +52,29 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: Consumer<ThemeProvider>(
-        child: const NotePage(), //Main sayfaya burdan erişiyoruz
+        child: FutureBuilder(
+          future: AuthService.firebase().initialize(),
+					builder: (context, snapshot){
+						switch(snapshot.connectionState){
+							case ConnectionState.done:
+								final user = AuthService.firebase().currentUser;
+								if(user != null){
+									if (user.isEmailVerified){
+										debugPrint("Email is verified");
+									}
+									else {
+										return const VerifyEmailView();
+									}
+								}
+								else {
+									return const LoginView();
+								}
+								return const NotePage();
+							default:
+								return const CircularProgressIndicator();
+						}
+					}
+        ), //Main sayfaya burdan erişiyoruz
         builder: (c, themeProvider, home) => MaterialApp(
           title: 'Flutter Theme And Primary Color Switcher',
           debugShowCheckedModeBanner: false,
