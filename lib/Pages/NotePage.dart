@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:real_to_do_list/Const/routes.dart';
 import 'package:real_to_do_list/main.dart';
+import 'package:real_to_do_list/storage/storage_service.dart';
 
 import '../Const/Drawer/NavigationDrawer.dart';
 
@@ -12,6 +13,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:real_to_do_list/services/crud/notes_service.dart';
 import 'package:real_to_do_list/Pages/notes_list_view.dart';
 import 'package:real_to_do_list/services/auth/auth_service.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:real_to_do_list/main.dart';
+import '../../storage/storage_service.dart';
+
+import 'package:real_to_do_list/storage/service_locator.dart';
+
 
 class NotePage extends StatefulWidget {
   const NotePage({super.key});
@@ -21,6 +30,7 @@ class NotePage extends StatefulWidget {
 }
 
 class _NotePage extends State<NotePage> {
+  final StorageService storageService = getIt<StorageService>();
   late final NotesService _noteService;
   String get userEmail => AuthService.firebase().currentUser!.email!;
 
@@ -42,6 +52,14 @@ class _NotePage extends State<NotePage> {
 
     //primaryBackOptions();
 
+    //Ertesi gün notları silme
+    DateTime date = DateTime.now();
+    
+    if(storageService.get("today") != DateFormat('EEEE').format(date)){
+      storageService.set("today", DateFormat('EEEE').format(date));
+      _noteService.deleteAllNotes();
+    }
+ 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         foregroundColor: Colors.black,
