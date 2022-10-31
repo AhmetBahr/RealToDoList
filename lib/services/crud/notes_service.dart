@@ -9,6 +9,7 @@ class NotesService{
   Database? _db;
 
   List<DatabaseNote> _notes = [];
+  List<DatabaseNote> _completedNotes = [];
 
   //singleton
   static final NotesService _shared = NotesService._sharedInstance();
@@ -19,13 +20,21 @@ class NotesService{
 
       }
     );
+    _completedNotesStreamController = StreamController<List<DatabaseNote>>.broadcast( //broadcast lets you listen to it again
+      onListen: () {
+        _completedNotesStreamController.sink.add(_completedNotes);
+
+      }
+    );
   }
   factory NotesService() => _shared;
 
   late final StreamController<List<DatabaseNote>> _notesStreamController;
+  late final StreamController<List<DatabaseNote>> _completedNotesStreamController;
 
   Stream<List<DatabaseNote>> get allNotes => _notesStreamController.stream; //Getter for getting all the notes
-  DateTime date = DateTime.now();
+  Stream<List<DatabaseNote>> get allCompletedNotes => _completedNotesStreamController.stream; //Getter for getting all the notes
+  
   Future<DatabaseUser> getOrCreateUser({required String email}) async {
     try{
       final user = await getUser(email: email);
@@ -37,12 +46,20 @@ class NotesService{
       rethrow;
     }
   }
-
+  
   Future<void> _cacheNotes() async {
     await _ensureDbIsOpen();
     final allNotes = await getAllNotes();
+    final allCompletedNotes = await getAllCompletedNotes();
     _notes = allNotes.toList();
     _notesStreamController.add(_notes);
+  }
+
+  Future<void> _cacheCompletedNotes() async {
+    await _ensureDbIsOpen();
+    final allCompletedNotes = await getAllCompletedNotes();
+    _completedNotes = allCompletedNotes.toList();
+    _completedNotesStreamController.add(_completedNotes);
   }
 
   Future <DatabaseNote> updateNote({required DatabaseNote note, required String text}) async {
@@ -69,11 +86,38 @@ class NotesService{
     }
   }
 
+  Future <DatabaseNote> updateCompletedNote({required DatabaseNote completedNote, required String text}) async {
+    await _ensureDbIsOpen();
+    final db = _getDatabaseOrThrow();
+    
+    //make sure note exists
+    await getCompletedNote(id: completedNote.id);
+    
+    //update db
+    final updatesCount = await db.update(completedNoteTable, {
+      textColumn: text, 
+      isSyncedWithCloudColumn: 0,
+    }, where: "id = ?", whereArgs: [completedNote.id]);
+
+      final updatedNote = await getCompletedNote(id: completedNote.id);
+      _completedNotes.removeWhere((completedNote) => completedNote.id == updatedNote.id);
+      _completedNotes.add(updatedNote);
+      _completedNotesStreamController.add(_completedNotes);
+      return updatedNote;
+  }
+
   Future <Iterable<DatabaseNote>> getAllNotes() async {
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final notes = await db.query(noteTable);
     return notes.map((noteRow) => DatabaseNote.fromRow(noteRow));
+  }
+
+  Future <Iterable<DatabaseNote>> getAllCompletedNotes() async {
+    await _ensureDbIsOpen();
+    final db = _getDatabaseOrThrow();
+    final completedNotes = await db.query(completedNoteTable);
+    return completedNotes.map((completedNoteRow) => DatabaseNote.fromRow(completedNoteRow));
   }
 
   Future <DatabaseNote> getNote({required int id}) async {
@@ -91,12 +135,36 @@ class NotesService{
     }
   }
 
+  Future <DatabaseNote> getCompletedNote({required int id}) async {
+    await _ensureDbIsOpen();
+    final db = _getDatabaseOrThrow();
+    final notes = await db.query(completedNoteTable, limit: 1, where: "id = ?", whereArgs: [id]);
+    if(notes.isEmpty)
+      throw CouldNotFindNoteException();
+    else{
+      final note = DatabaseNote.fromRow(notes.first);
+      _notes.removeWhere((note) => note.id == id);
+      _notes.add(note);
+      _completedNotesStreamController.add(_notes);
+      return note;
+    }
+  }
+
   Future <int> deleteAllNotes() async{
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final numberOfDeletions = await db.delete(noteTable);
     _notes = [];
     _notesStreamController.add(_notes);
+    return numberOfDeletions;
+  }
+
+  Future <int> deleteAllCompletedNotes() async{
+    await _ensureDbIsOpen();
+    final db = _getDatabaseOrThrow();
+    final numberOfDeletions = await db.delete(completedNoteTable);
+    _completedNotes = [];
+    _completedNotesStreamController.add(_completedNotes);
     return numberOfDeletions;
   }
 
@@ -142,6 +210,35 @@ class NotesService{
     }
   }
 
+  Future <DatabaseNote> createCompletedNote({required DatabaseUser owner}) async {
+    await _ensureDbIsOpen();
+    final db = _getDatabaseOrThrow();
+    //make sure owner exists in the db with correct id
+    final dbUser = await getUser(email: owner.email);
+    if(dbUser != owner)
+      throw CouldNotFindUserException();
+    else{
+      const text = "";
+      //create the note
+      final noteId = await db.insert(completedNoteTable, {
+        userIdColumn: owner.id,
+        textColumn: text,
+        isSyncedWithCloudColumn: 1,
+      });
+
+      final note = DatabaseNote(
+        id: noteId,
+        userId: owner.id,
+        text: text,
+        isSyncedWithCloud: true,
+      );
+
+      _completedNotes.add(note);
+      _completedNotesStreamController.add(_completedNotes);
+      
+      return note;
+    }
+  }
   Future <DatabaseUser> getUser({required String email}) async {
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
@@ -202,7 +299,7 @@ class NotesService{
 
       await db.execute(createUserTable);
       await db.execute(createNotesTable);
-      print(db);
+      await db.execute(createCompletedNotesTable);
 
       await _cacheNotes();
     } on MissingPlatformDirectoryException {
@@ -277,6 +374,7 @@ class DatabaseNote{
 const dbName = "notes.db";
 const noteTable = "note";
 const userTable = "user";
+const completedNoteTable = "completed";
 const idColumn = "id";
 const emailColumn = "email";
 const userIdColumn = "user_id";
@@ -293,6 +391,17 @@ const createUserTable = '''
 
 const createNotesTable = '''
 CREATE TABLE IF NOT EXISTS "note" (
+  "id"  INTEGER NOT NULL,
+  "user_id" INTEGER NOT NULL,
+  "text"  TEXT,
+  "is_synced_with_cloud"  INTEGER NOT NULL DEFAULT 0,
+  FOREIGN KEY("user_id") REFERENCES "user"("id"),
+  PRIMARY KEY("id" AUTOINCREMENT)
+);
+''';
+
+const createCompletedNotesTable = '''
+CREATE TABLE IF NOT EXISTS "completed" (
   "id"  INTEGER NOT NULL,
   "user_id" INTEGER NOT NULL,
   "text"  TEXT,

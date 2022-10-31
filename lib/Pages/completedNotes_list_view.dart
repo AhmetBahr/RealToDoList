@@ -8,13 +8,13 @@ import 'package:intl/date_symbol_data_local.dart';
 
 typedef DeleteNoteCallback = void Function(DatabaseNote note);
 
-class NotesListView extends StatelessWidget{
+class CompletedNotesListView extends StatelessWidget{
   final List<DatabaseNote> notes;
   final List<DatabaseNote> completedNotes;
   final DeleteNoteCallback onDeleteNote;
   late final NotesService _notesService;
 
-  NotesListView({Key? key, required this.notes, required this.completedNotes, required this.onDeleteNote}) : super(key: key);
+  CompletedNotesListView({Key? key, required this.notes, required this.completedNotes, required this.onDeleteNote}) : super(key: key);
   @override
   Widget build(BuildContext context){
     /*
@@ -29,7 +29,7 @@ class NotesListView extends StatelessWidget{
       //reverse: true,
       itemCount: notes.length,
       itemBuilder: (context, index) {
-        final note = notes[index];
+        final note = completedNotes[index];
         thisTile: return ListTile(
           title: Text(
             note.text,
