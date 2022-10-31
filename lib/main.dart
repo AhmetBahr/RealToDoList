@@ -67,6 +67,7 @@ class MyApp extends StatelessWidget {
           home: home,
           routes: {
             // themeaPagee: (context) => const ThmemePage(),
+            notesRoute:(context) => const NotePage(),
             loginRoute: (context) => const LoginView(),
             registerRoute: (context) => const RegisterView(),
             verifyEmailRoute: (context) => const VerifyEmailView(),
