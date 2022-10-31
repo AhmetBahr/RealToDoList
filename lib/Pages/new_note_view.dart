@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:real_to_do_list/services/crud/notes_service.dart';
 import 'package:real_to_do_list/services/auth/auth_service.dart';
 import 'package:real_to_do_list/services/auth/auth_user.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class NewNoteView extends StatefulWidget{
   const NewNoteView({ Key? key }) : super(key: key);
@@ -14,6 +18,7 @@ class _NewNoteViewState extends State<NewNoteView>{
   DatabaseNote? _note;
   late final NotesService _notesService;
   late final TextEditingController _textController;
+  DateTime date = DateTime.now();
   
   void _textControllerListener() async {
     final note = _note;

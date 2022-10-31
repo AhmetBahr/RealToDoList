@@ -25,7 +25,7 @@ class NotesService{
   late final StreamController<List<DatabaseNote>> _notesStreamController;
 
   Stream<List<DatabaseNote>> get allNotes => _notesStreamController.stream; //Getter for getting all the notes
-  
+  DateTime date = DateTime.now();
   Future<DatabaseUser> getOrCreateUser({required String email}) async {
     try{
       final user = await getUser(email: email);
@@ -55,7 +55,7 @@ class NotesService{
     //update db
     final updatesCount = await db.update(noteTable, {
       textColumn: text, 
-      isSyncedWithCloudColumn: 0
+      isSyncedWithCloudColumn: 0,
     }, where: "id = ?", whereArgs: [note.id]);
 
     if(updatesCount == 0)
@@ -125,14 +125,14 @@ class NotesService{
       final noteId = await db.insert(noteTable, {
         userIdColumn: owner.id,
         textColumn: text,
-        isSyncedWithCloudColumn: 1
+        isSyncedWithCloudColumn: 1,
       });
 
       final note = DatabaseNote(
         id: noteId,
         userId: owner.id,
         text: text,
-        isSyncedWithCloud: true
+        isSyncedWithCloud: true,
       );
 
       _notes.add(note);
@@ -255,7 +255,7 @@ class DatabaseNote{
     required this.id,
     required this.userId, 
     required this.text, 
-    required this.isSyncedWithCloud
+    required this.isSyncedWithCloud,
   });
 
   DatabaseNote.fromRow(Map<String, Object?> map):
