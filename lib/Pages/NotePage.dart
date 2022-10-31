@@ -12,6 +12,7 @@ import 'package:flutter/src/rendering/box.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:real_to_do_list/services/crud/notes_service.dart';
 import 'package:real_to_do_list/Pages/notes_list_view.dart';
+import 'package:real_to_do_list/Pages/completedNotes_list_view.dart';
 import 'package:real_to_do_list/services/auth/auth_service.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -81,80 +82,98 @@ class _NotePage extends State<NotePage> {
         },
       ),
       drawer: NavigationDrawerWidget(),
-      body:/* FutureBuilder( 
-          future: _noteService.getOrCreateUser(email: userEmail),
-          builder: (context, snapshot) {
-            switch(snapshot.connectionState){
-              case ConnectionState.done:
-                return StreamBuilder(
-                  stream: _noteService.allNotes,
-                  builder: (context, snapshot) {
-                    switch(snapshot.connectionState){
-                      case ConnectionState.waiting:
-                      case ConnectionState.active:
-                        if (snapshot.hasData){
-                          final allNotes = snapshot.data as List<DatabaseNote>;
-                          return NotesListView(
-                            notes: allNotes, 
-                            onDeleteNote: (note) async {
-                              await _noteService.deleteNote(id: note.id);
-                            }
-                          );
-                        } else {
-                          return const CircularProgressIndicator();
-                        }
-                      default:     
-                        return const CircularProgressIndicator();
-                    }
-                  }
-                );
-              default:  
-                return const CircularProgressIndicator();
-            }
-          }
-        )*/
-        SizedBox(
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("asset/svg/unlem.png"),
-              //fit: BoxFit.cover,
-              fit: BoxFit.contain,
+      body:ListView(
+        children: [
+          TopCategory(),
+          Container(
+            height: MediaQuery.of(context).size.height*0.5,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("asset/svg/unlem.png"),
+                //fit: BoxFit.cover,
+                fit: BoxFit.contain,
+              ),
             ),
-          ),
-          child: FutureBuilder(
-            future: _noteService.getOrCreateUser(email: userEmail),
-            builder: (context, snapshot) {
-              switch(snapshot.connectionState){
-                case ConnectionState.done:
-                  return StreamBuilder(
-                    stream: _noteService.allNotes,
-                    builder: (context, snapshot) {
-                      switch(snapshot.connectionState){
-                        case ConnectionState.waiting:
-                        case ConnectionState.active:
-                          if (snapshot.hasData){
-                            final allNotes = snapshot.data as List<DatabaseNote>;
-                            return NotesListView(
-                              notes: allNotes, 
-                              onDeleteNote: (note) async {
-                                await _noteService.deleteNote(id: note.id);
-                              }
-                            );
-                          } else {
+            child: FutureBuilder(
+              future: _noteService.getOrCreateUser(email: userEmail),
+              builder: (context, snapshot) {
+                switch(snapshot.connectionState){
+                  case ConnectionState.done:
+                    return StreamBuilder(
+                      stream: _noteService.allNotes,
+                      builder: (context, snapshot) {
+                        switch(snapshot.connectionState){
+                          case ConnectionState.waiting:
+                          case ConnectionState.active:
+                            if (snapshot.hasData){
+                              final allNotes = snapshot.data as List<DatabaseNote>;
+                              final allCompletedNotes = snapshot.data as List<DatabaseNote>;
+                              return NotesListView(
+                                notes: allNotes, 
+                                completedNotes: allCompletedNotes,
+                                onDeleteNote: (note) async {
+                                  await _noteService.deleteNote(id: note.id);
+                                }
+                              );
+                            } else {
+                              return const CircularProgressIndicator();
+                            }
+                          default:     
                             return const CircularProgressIndicator();
-                          }
-                        default:     
-                          return const CircularProgressIndicator();
+                        }
                       }
-                    }
-                  );
-                default:  
-                  return const CircularProgressIndicator();
+                    );
+                  default:  
+                    return const CircularProgressIndicator();
+                }
               }
-            }
-          ) 
-        )
+            ) 
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height*0.5,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("asset/svg/unlem.png"),
+                //fit: BoxFit.cover,
+                fit: BoxFit.contain,
+              ),
+            ),
+            child: FutureBuilder(
+              future: _noteService.getOrCreateUser(email: userEmail),
+              builder: (context, snapshot) {
+                switch(snapshot.connectionState){
+                  case ConnectionState.done:
+                    return StreamBuilder(
+                      stream: _noteService.allCompletedNotes,
+                      builder: (context, snapshot) {
+                        switch(snapshot.connectionState){
+                          case ConnectionState.waiting:
+                          case ConnectionState.active:
+                            if (snapshot.hasData){
+                              final allNotes = snapshot.data as List<DatabaseNote>;
+                              final allCompletedNotes = snapshot.data as List<DatabaseNote>;
+                              return CompletedNotesListView(
+                                notes: allNotes, 
+                                completedNotes: allCompletedNotes,
+                                onDeleteNote: (note) async {
+                                  await _noteService.deleteNote(id: note.id);
+                                }
+                              );
+                            } else {
+                              return const CircularProgressIndicator();
+                            }
+                          default:     
+                            return const CircularProgressIndicator();
+                        }
+                      }
+                    );
+                  default:  
+                    return const CircularProgressIndicator();
+                }
+              }
+            ) 
+          ),
+        ],
         /*    //ESKI SizedBox içi
               // ignore: prefer_const_constructors
               TopCategory(),
