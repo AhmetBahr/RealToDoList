@@ -6,6 +6,8 @@ import '../../Pages/SettingsPages/setting_pages.dart';
 import '../../Pages/Old_ThemaPage.dart';
 import '../../Pages/Theme_Settings_Page.dart';
 import '../../Pages/login_view.dart';
+import '../../utilities/dialogs/logout_dialog.dart';
+import '../../services/auth/auth_service.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   NavigationDrawerWidget({super.key});
@@ -128,6 +130,10 @@ class NavigationDrawerWidget extends StatelessWidget {
                 text: "Profile",
                 icon: Icons.people_alt_rounded,
                 onClicked: () => selectedItem(context, 7)),
+              buildMenuItem(
+                text: "Çıkış Yap",
+                icon: Icons.logout,
+                onClicked: () => selectedItem(context, 8)),
             const SizedBox(
               height: 5,
             ),
@@ -160,7 +166,7 @@ class NavigationDrawerWidget extends StatelessWidget {
   }
 }
 
-void selectedItem(BuildContext context, int index) {
+void selectedItem(BuildContext context, int index) async {
   Navigator.of(context).pop();
   switch (index) {
     case 0:
@@ -197,6 +203,12 @@ void selectedItem(BuildContext context, int index) {
         builder: (context) => LoginView(),
       ));
       break;
+    case 8:
+			final shouldLogOut = await showLogOutDialog(context);
+			if (shouldLogOut){
+				await AuthService.firebase().logOut();
+			}
+		break;
   }
 }
 
