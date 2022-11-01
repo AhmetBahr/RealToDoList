@@ -50,7 +50,6 @@ class NotesService{
   Future<void> _cacheNotes() async {
     await _ensureDbIsOpen();
     final allNotes = await getAllNotes();
-    final allCompletedNotes = await getAllCompletedNotes();
     _notes = allNotes.toList();
     _notesStreamController.add(_notes);
   }
@@ -98,12 +97,16 @@ class NotesService{
       textColumn: text, 
       isSyncedWithCloudColumn: 0,
     }, where: "id = ?", whereArgs: [completedNote.id]);
-
+    
+    if(updatesCount == 0)
+      throw CouldNotUpdateNotesException();
+    else{
       final updatedNote = await getCompletedNote(id: completedNote.id);
       _completedNotes.removeWhere((completedNote) => completedNote.id == updatedNote.id);
       _completedNotes.add(updatedNote);
       _completedNotesStreamController.add(_completedNotes);
       return updatedNote;
+    }
   }
 
   Future <Iterable<DatabaseNote>> getAllNotes() async {
@@ -124,8 +127,9 @@ class NotesService{
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final notes = await db.query(noteTable, limit: 1, where: "id = ?", whereArgs: [id]);
-    if(notes.isEmpty)
+    if(notes.isEmpty){
       throw CouldNotFindNoteException();
+    }
     else{
       final note = DatabaseNote.fromRow(notes.first);
       _notes.removeWhere((note) => note.id == id);
@@ -139,8 +143,9 @@ class NotesService{
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final notes = await db.query(completedNoteTable, limit: 1, where: "id = ?", whereArgs: [id]);
-    if(notes.isEmpty)
+    if(notes.isEmpty){
       throw CouldNotFindNoteException();
+    }
     else{
       final note = DatabaseNote.fromRow(notes.first);
       _notes.removeWhere((note) => note.id == id);
@@ -302,6 +307,7 @@ class NotesService{
       await db.execute(createCompletedNotesTable);
 
       await _cacheNotes();
+      await _cacheCompletedNotes();
     } on MissingPlatformDirectoryException {
       throw UnableToGetDocumentsDirectoryException();
     }

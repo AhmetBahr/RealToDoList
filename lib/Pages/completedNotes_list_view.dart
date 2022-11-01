@@ -38,19 +38,17 @@ class CompletedNotesListView extends StatelessWidget{
             overflow: TextOverflow.ellipsis
           ),
           trailing: IconButton(
-            onPressed: () async {
+            onPressed: () async {/*
               if(note.text.indexOf("✓") == -1){
                 final currentUser = AuthService.firebase().currentUser!;
                 final email = currentUser.email!;
-                final owner = await _notesService.getUser(email: email);
+                final owner = await _notesService.getUser(email: email); 
                 await _notesService.createCompletedNote(owner: owner);
-                await _notesService.updateCompletedNote(completedNote: completedNotes[0], text: "✓ " + note.text);
-                print(completedNotes[0].text);
-                onDeleteNote(note);
-              }
-            },
+                await _notesService.updateCompletedNote(completedNote: completedNotes[completedNotes.length-1], text: "✓ " + note.text);
+                onDeleteNote(note);*/
+              },
             icon: const Icon(Icons.done)
-          ),
+          )
         );
       }
     );
