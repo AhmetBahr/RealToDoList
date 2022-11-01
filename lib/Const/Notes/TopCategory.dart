@@ -20,19 +20,19 @@ class _TopCategoryState extends State<TopCategory> {
         children: [
           Row(
             children: [
-              MyMidActonButton(),
+              MyMidActonButton(1),
               SizedBox(
                 width: 10,
               ),
-              MyMidActonButton(),
+              MyMidActonButton(2),
               SizedBox(
                 width: 10,
               ),
-              MyMidActonButton(),
+              MyMidActonButton(3),
               SizedBox(
                 width: 10,
               ),
-              MyMidActonButton(),
+              MyMidActonButton(4),
             ],
           ),
         ],

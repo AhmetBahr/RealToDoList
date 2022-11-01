@@ -17,6 +17,7 @@ import 'package:real_to_do_list/Const/routes.dart';
 import 'Const/NewTheme/Theme_provider.dart';
 import 'Const/OldTheme/thmema_provader.dart';
 import 'Pages/NotePage.dart';
+import 'Pages/AnonNotePage.dart';
 import 'Pages/Old_ThemaPage.dart';
 import 'Pages/Theme_Settings_Page.dart';
 import 'package:localstorage/localstorage.dart';
@@ -91,6 +92,7 @@ class MyApp extends StatelessWidget {
           routes: {
             // themeaPagee: (context) => const ThmemePage(),
             notesRoute:(context) => const NotePage(),
+            anonNotesRoute: (context) => const AnonNotePage(),
             loginRoute: (context) => const LoginView(),
             registerRoute: (context) => const RegisterView(),
             verifyEmailRoute: (context) => const VerifyEmailView(),

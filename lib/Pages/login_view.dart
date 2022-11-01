@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:real_to_do_list/Const/routes.dart';
 import 'package:real_to_do_list/Pages/register_view.dart';
 import 'package:real_to_do_list/services/auth/auth_exceptions.dart';
+import 'package:real_to_do_list/services/auth/auth_provider.dart';
 import 'package:real_to_do_list/services/auth/auth_service.dart';
 import 'package:real_to_do_list/utilities/show_error_dialog.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -115,12 +117,19 @@ class _LoginViewState extends State<LoginView> {
           ),
         ),
         TextButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => RegisterView(),
-              ));
-            },
-            child: const Text("Not registered yet"))
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => RegisterView(),
+            ));
+          },
+          child: const Text("Not registered yet")
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed(anonNotesRoute);
+          },
+          child: const Text("Login anonymously")
+        )
       ]),
     );
   }

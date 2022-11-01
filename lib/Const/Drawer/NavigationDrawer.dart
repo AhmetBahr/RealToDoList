@@ -207,6 +207,7 @@ void selectedItem(BuildContext context, int index) async {
 			final shouldLogOut = await showLogOutDialog(context);
 			if (shouldLogOut){
 				await AuthService.firebase().logOut();
+      Navigator.of(context).pushNamed(loginRoute);
 			}
 		break;
   }
