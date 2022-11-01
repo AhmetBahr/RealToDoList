@@ -52,13 +52,13 @@ class _NotePage extends State<NotePage> {
         : 'LightTheme';
 
     //primaryBackOptions();
-
     //Ertesi gün notları silme
     DateTime date = DateTime.now();
     
     if(storageService.get("today") != DateFormat('EEEE').format(date)){
       storageService.set("today", DateFormat('EEEE').format(date));
       _noteService.deleteAllNotes();
+      _noteService.deleteAllCompletedNotes();
     }
  
     return Scaffold(
@@ -90,8 +90,8 @@ class _NotePage extends State<NotePage> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("asset/svg/unlem.png"),
-                //fit: BoxFit.cover,
-                fit: BoxFit.contain,
+                //fit: BoxFit.contain,
+                alignment: Alignment.bottomCenter
               ),
             ),
             child: FutureBuilder(
@@ -131,13 +131,6 @@ class _NotePage extends State<NotePage> {
           ),
           Container(
             height: MediaQuery.of(context).size.height*0.5,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("asset/svg/unlem.png"),
-                //fit: BoxFit.cover,
-                fit: BoxFit.contain,
-              ),
-            ),
             child: FutureBuilder(
               future: _noteService.getOrCreateUser(email: userEmail),
               builder: (context, snapshot) {
