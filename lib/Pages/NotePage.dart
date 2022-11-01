@@ -86,12 +86,11 @@ class _NotePage extends State<NotePage> {
         children: [
           TopCategory(),
           Container(
-            height: MediaQuery.of(context).size.height*0.5,
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("asset/svg/unlem.png"),
-                //fit: BoxFit.contain,
-                alignment: Alignment.bottomCenter
+                fit: BoxFit.contain,
               ),
             ),
             child: FutureBuilder(
@@ -109,43 +108,6 @@ class _NotePage extends State<NotePage> {
                               final allNotes = snapshot.data as List<DatabaseNote>;
                               final allCompletedNotes = snapshot.data as List<DatabaseNote>;
                               return NotesListView(
-                                notes: allNotes, 
-                                completedNotes: allCompletedNotes,
-                                onDeleteNote: (note) async {
-                                  await _noteService.deleteNote(id: note.id);
-                                }
-                              );
-                            } else {
-                              return const CircularProgressIndicator();
-                            }
-                          default:     
-                            return const CircularProgressIndicator();
-                        }
-                      }
-                    );
-                  default:  
-                    return const CircularProgressIndicator();
-                }
-              }
-            ) 
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height*0.5,
-            child: FutureBuilder(
-              future: _noteService.getOrCreateUser(email: userEmail),
-              builder: (context, snapshot) {
-                switch(snapshot.connectionState){
-                  case ConnectionState.done:
-                    return StreamBuilder(
-                      stream: _noteService.allCompletedNotes,
-                      builder: (context, snapshot) {
-                        switch(snapshot.connectionState){
-                          case ConnectionState.waiting:
-                          case ConnectionState.active:
-                            if (snapshot.hasData){
-                              final allNotes = snapshot.data as List<DatabaseNote>;
-                              final allCompletedNotes = snapshot.data as List<DatabaseNote>;
-                              return CompletedNotesListView(
                                 notes: allNotes, 
                                 completedNotes: allCompletedNotes,
                                 onDeleteNote: (note) async {

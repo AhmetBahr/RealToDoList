@@ -30,25 +30,38 @@ class NotesListView extends StatelessWidget{
       itemCount: notes.length,
       itemBuilder: (context, index) {
         final note = notes[index];
-        thisTile: return ListTile(
-          title: Text(
-            note.text,
-            maxLines: 1,
-            softWrap: true,
-            overflow: TextOverflow.ellipsis
-          ),
-          trailing: IconButton(
-            onPressed: () async {
-              final currentUser = AuthService.firebase().currentUser!;
-              final email = currentUser.email!;
-              final owner = await _notesService.getUser(email: email); 
-              await _notesService.createCompletedNote(owner: owner);
-              await _notesService.updateCompletedNote(completedNote: completedNotes[completedNotes.length-1], text: "✓ " + note.text);
-              onDeleteNote(note);
-            },
-            icon: const Icon(Icons.done)
-          ),
-        );
+        if(note.text.indexOf("✔") == -1){
+          return ListTile(
+            title: Text(
+              note.text,
+              maxLines: 1,
+              softWrap: true,
+              overflow: TextOverflow.ellipsis
+            ),
+            trailing: IconButton(
+              onPressed: () async {
+                final currentUser = AuthService.firebase().currentUser!;
+                final email = currentUser.email!;
+                final owner = await _notesService.getUser(email: email); 
+                await _notesService.createNote(owner: owner);
+                await _notesService.updateNote(note: notes[notes.length-1], text: "✔" + note.text);
+                onDeleteNote(note);
+              },
+              icon: const Icon(Icons.done)
+            ),
+          );
+        }
+        else{
+          return ListTile(
+            title: Text(
+              note.text,
+              maxLines: 1,
+              softWrap: true,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(decoration: TextDecoration.lineThrough),
+            ),
+          );
+        }
       }
     );
   }
