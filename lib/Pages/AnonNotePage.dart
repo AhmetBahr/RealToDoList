@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:real_to_do_list/Const/routes.dart';
 import 'package:real_to_do_list/main.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/src/rendering/box.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:real_to_do_list/services/crud/notes_service.dart';
 import 'package:real_to_do_list/Pages/notes_list_view.dart';
+import 'package:real_to_do_list/Pages/anonNotes_list_view.dart';
 import 'package:real_to_do_list/services/auth/auth_service.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -22,18 +24,18 @@ import '../../storage/storage_service.dart';
 import 'package:real_to_do_list/storage/service_locator.dart';
 
 
-class NotePage extends StatefulWidget {
-  const NotePage({super.key});
+class AnonNotePage extends StatefulWidget {
+  const AnonNotePage({super.key});
 
   @override
-  State<NotePage> createState() => _NotePage();
+  State<AnonNotePage> createState() => _AnonNotePage();
 }
 
-class _NotePage extends State<NotePage> {
+class _AnonNotePage extends State<AnonNotePage> {
   final StorageService storageService = getIt<StorageService>();
   late final NotesService _noteService;
-  String get userEmail => AuthService.firebase().currentUser!.email!;
-
+  //String get userEmail => AuthService.firebase().currentUser!.email!;
+  var i = 0;
   @override
   void initState() {
     _noteService = NotesService();
@@ -43,10 +45,8 @@ class _NotePage extends State<NotePage> {
     });
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
-    print("USERS NOTE PAGE");
     final text = MediaQuery.of(context).platformBrightness == Brightness.dark
         ? 'DarkTheme'
         : 'LightTheme';
@@ -55,19 +55,19 @@ class _NotePage extends State<NotePage> {
     //Ertesi gün notları silme
     DateTime date = DateTime.now();
     
+    print("ANON NOTE PAGE");
     if(storageService.get("today") != DateFormat('EEEE').format(date)){
-      print("SİLİNDİ");
       storageService.set("today", DateFormat('EEEE').format(date));
       _noteService.deleteAllNotes();
       _noteService.deleteAllCompletedNotes();
     }
- 
+    
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         foregroundColor: Colors.black,
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.of(context).pushNamed(newNoteRoute);
+          Navigator.of(context).pushNamed(newAnonNoteRoute);
           /*
           showDialog(
             context: context,
@@ -95,22 +95,22 @@ class _NotePage extends State<NotePage> {
               ),
             ),
             child: FutureBuilder(
-              future: _noteService.getOrCreateUser(email: userEmail),
+              future: FirebaseAuth.instance.signInAnonymously(),
               builder: (context, snapshot) {
                 switch(snapshot.connectionState){
                   case ConnectionState.done:
                     return StreamBuilder(
-                      stream: _noteService.allNotes,
+                      stream: _noteService.allAnonNotes,
                       builder: (context, snapshot) {
                         switch(snapshot.connectionState){
                           case ConnectionState.waiting:
                           case ConnectionState.active:
                             if (snapshot.hasData){
-                              final allNotes = snapshot.data as List<DatabaseNote>;
-                              return NotesListView(
-                                notes: allNotes, 
+                              final allAnonNotes = snapshot.data as List<AnonDatabaseNote>;
+                              return AnonNotesListView(
+                                notes: allAnonNotes, 
                                 onDeleteNote: (note) async {
-                                  await _noteService.deleteNote(id: note.id);
+                                  await _noteService.deleteAnonNote(id: note.id);
                                 }
                               );
                             } else {
@@ -125,7 +125,7 @@ class _NotePage extends State<NotePage> {
                     return const CircularProgressIndicator();
                 }
               }
-            ) 
+            )
           ),
         ],
         /*    //ESKI SizedBox içi
