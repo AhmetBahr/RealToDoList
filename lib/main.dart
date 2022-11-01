@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:real_to_do_list/Pages/new_anonNote_view.dart';
 import 'package:real_to_do_list/presentation/pr/Models/Styles/app_themes.dart';
 import 'package:real_to_do_list/storage/service_locator.dart';
 import 'package:real_to_do_list/storage/storage_service.dart';
@@ -61,6 +62,9 @@ class MyApp extends StatelessWidget {
 							case ConnectionState.done:
 								final user = AuthService.firebase().currentUser;
 								if(user != null){
+                  if(user.isAnonymous){
+                    return const AnonNotePage();
+                  }
 									if (user.isEmailVerified){
 										debugPrint("Email is verified");
 									}
@@ -97,6 +101,7 @@ class MyApp extends StatelessWidget {
             registerRoute: (context) => const RegisterView(),
             verifyEmailRoute: (context) => const VerifyEmailView(),
             newNoteRoute: (context) => const NewNoteView(),
+            newAnonNoteRoute: (context) => const NewAnonNoteView(),
           },
         ),
       ),

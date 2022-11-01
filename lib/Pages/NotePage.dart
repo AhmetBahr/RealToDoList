@@ -46,6 +46,7 @@ class _NotePage extends State<NotePage> {
 
   @override
   Widget build(BuildContext context) {
+    print("USERS NOTE PAGE");
     final text = MediaQuery.of(context).platformBrightness == Brightness.dark
         ? 'DarkTheme'
         : 'LightTheme';

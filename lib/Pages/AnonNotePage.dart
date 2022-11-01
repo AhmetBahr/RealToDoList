@@ -67,7 +67,7 @@ class _AnonNotePage extends State<AnonNotePage> {
         foregroundColor: Colors.black,
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.of(context).pushNamed(newNoteRoute);
+          Navigator.of(context).pushNamed(newAnonNoteRoute);
           /*
           showDialog(
             context: context,

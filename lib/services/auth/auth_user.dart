@@ -5,7 +5,8 @@ import 'package:flutter/widgets.dart';
 class AuthUser {
   final String? email;
   final bool isEmailVerified;
-  const AuthUser({required this.email, required this.isEmailVerified});
+  final bool isAnonymous;
+  const AuthUser({required this.email, required this.isEmailVerified, required this.isAnonymous});
 
-  factory AuthUser.fromFirebase(User user) => AuthUser(email: user.email, isEmailVerified: user.emailVerified);
+  factory AuthUser.fromFirebase(User user) => AuthUser(email: user.email, isEmailVerified: user.emailVerified, isAnonymous:user.isAnonymous);
 }

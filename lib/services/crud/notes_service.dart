@@ -66,7 +66,7 @@ class NotesService{
     await _ensureDbIsOpen();
     final allAnonNotes = await getAllAnonNotes();
     _anonNotes = allAnonNotes.toList();
-    _notesStreamController.add(_notes);
+    _anonNotesStreamController.add(_anonNotes);
   }
 
   Future<void> _cacheCompletedNotes() async {
@@ -143,7 +143,7 @@ class NotesService{
       _anonNotes.removeWhere((note) => note.id == note.id);
       _anonNotes.add(note);
       _anonNotesStreamController.add(_anonNotes);
-      return note;
+      return updatedNote;
     }
   }
 
@@ -318,6 +318,7 @@ class NotesService{
   
     return note;
   }
+
   Future <DatabaseNote> createCompletedNote({required DatabaseUser owner}) async {
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
@@ -505,9 +506,6 @@ class AnonDatabaseNote{
 
   @override
   String toString() => "Note, ID = $id, text = $text";
-  
-  @override
-  int get hashCode => id.hashCode;
 }
 
 const dbName = "notes.db";
