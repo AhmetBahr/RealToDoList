@@ -21,7 +21,6 @@ import '../../storage/storage_service.dart';
 
 import 'package:real_to_do_list/storage/service_locator.dart';
 
-
 class NotePage extends StatefulWidget {
   const NotePage({super.key});
 
@@ -38,7 +37,7 @@ class _NotePage extends State<NotePage> {
   void initState() {
     _noteService = NotesService();
     _noteService.open();
-    Firebase.initializeApp().whenComplete(() { 
+    Firebase.initializeApp().whenComplete(() {
       setState(() {});
     });
     super.initState();
@@ -54,21 +53,21 @@ class _NotePage extends State<NotePage> {
     //primaryBackOptions();
     //Ertesi gün notları silme
     DateTime date = DateTime.now();
-    
-    if(storageService.get("today") != DateFormat('EEEE').format(date)){
+
+    if (storageService.get("today") != DateFormat('EEEE').format(date)) {
       print("SİLİNDİ");
       storageService.set("today", DateFormat('EEEE').format(date));
       _noteService.deleteAllNotes();
       _noteService.deleteAllCompletedNotes();
     }
- 
+
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        foregroundColor: Colors.black,
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.of(context).pushNamed(newNoteRoute);
-          /*
+        floatingActionButton: FloatingActionButton(
+          foregroundColor: Colors.black,
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.of(context).pushNamed(newNoteRoute);
+            /*
           showDialog(
             context: context,
             builder: (context) {
@@ -80,55 +79,58 @@ class _NotePage extends State<NotePage> {
               );
           });
           */
-        },
-      ),
-      drawer: NavigationDrawerWidget(),
-      body:ListView(
-        children: [
-          TopCategory(),
-          Container(
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("asset/svg/unlem.png"),
-                fit: BoxFit.contain,
-              ),
+          },
+        ),
+        drawer: NavigationDrawerWidget(),
+        body: ListView(
+          children: [
+            TopCategory(),
+            TextInNotePage(),
+            TextSubtitle(),
+            const Divider(
+              color: Colors.black,
             ),
-            child: FutureBuilder(
-              future: _noteService.getOrCreateUser(email: userEmail),
-              builder: (context, snapshot) {
-                switch(snapshot.connectionState){
-                  case ConnectionState.done:
-                    return StreamBuilder(
-                      stream: _noteService.allNotes,
-                      builder: (context, snapshot) {
-                        switch(snapshot.connectionState){
-                          case ConnectionState.waiting:
-                          case ConnectionState.active:
-                            if (snapshot.hasData){
-                              final allNotes = snapshot.data as List<DatabaseNote>;
-                              return NotesListView(
-                                notes: allNotes, 
-                                onDeleteNote: (note) async {
-                                  await _noteService.deleteNote(id: note.id);
+            Container(
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("asset/svg/unlem.png"),
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                child: FutureBuilder(
+                    future: _noteService.getOrCreateUser(email: userEmail),
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.done:
+                          return StreamBuilder(
+                              stream: _noteService.allNotes,
+                              builder: (context, snapshot) {
+                                switch (snapshot.connectionState) {
+                                  case ConnectionState.waiting:
+                                  case ConnectionState.active:
+                                    if (snapshot.hasData) {
+                                      final allNotes =
+                                          snapshot.data as List<DatabaseNote>;
+                                      return NotesListView(
+                                          notes: allNotes,
+                                          onDeleteNote: (note) async {
+                                            await _noteService.deleteNote(
+                                                id: note.id);
+                                          });
+                                    } else {
+                                      return const CircularProgressIndicator();
+                                    }
+                                  default:
+                                    return const CircularProgressIndicator();
                                 }
-                              );
-                            } else {
-                              return const CircularProgressIndicator();
-                            }
-                          default:     
-                            return const CircularProgressIndicator();
-                        }
+                              });
+                        default:
+                          return const CircularProgressIndicator();
                       }
-                    );
-                  default:  
-                    return const CircularProgressIndicator();
-                }
-              }
-            ) 
-          ),
-        ],
-        /*    //ESKI SizedBox içi
+                    })),
+          ],
+          /*    //ESKI SizedBox içi
               // ignore: prefer_const_constructors
               TopCategory(),
               const Divider(
@@ -158,10 +160,7 @@ class _NotePage extends State<NotePage> {
                   ),
                 ),
               ),*/
-      )
-    );
-
-
+        ));
   }
 }
 
