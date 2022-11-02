@@ -63,7 +63,6 @@ class _NotePage extends State<NotePage> {
 
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          foregroundColor: Colors.black,
           child: Icon(Icons.add),
           onPressed: () {
             Navigator.of(context).pushNamed(newNoteRoute);

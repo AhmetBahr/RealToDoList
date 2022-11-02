@@ -64,7 +64,6 @@ class _AnonNotePage extends State<AnonNotePage> {
     
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        foregroundColor: Colors.black,
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.of(context).pushNamed(newAnonNoteRoute);
