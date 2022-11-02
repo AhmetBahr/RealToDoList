@@ -1,9 +1,14 @@
 import 'package:flutter/widgets.dart';
+import 'package:real_to_do_list/services/auth/auth_provider.dart';
+import 'package:real_to_do_list/services/auth/auth_user.dart';
+import 'package:real_to_do_list/services/auth/auth_service.dart';
+import 'package:real_to_do_list/services/auth/firebase_auth_porivder.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' show join;
 import "package:real_to_do_list/services/crud/crud_exceptions.dart";
 import "dart:async";
+import 'package:firebase_auth/firebase_auth.dart';
 
 class NotesService{
   Database? _db;
@@ -54,6 +59,18 @@ class NotesService{
       rethrow;
     }
   }
+ 
+  Future<AuthUser?> getOrCreateAnonUser() async {
+    try{
+      final user = await getAnonUser();
+      return user;
+    }on CouldNotFindUserException{
+      final createdUser = await createAnonUser();
+      return createdUser;
+    } catch (e) {
+      rethrow;
+    }
+  }
   
   Future<void> _cacheNotes() async {
     await _ensureDbIsOpen();
@@ -65,6 +82,7 @@ class NotesService{
   Future<void> _cacheAnonNotes() async {
     await _ensureDbIsOpen();
     final allAnonNotes = await getAllAnonNotes();
+    print(allAnonNotes);
     _anonNotes = allAnonNotes.toList();
     _anonNotesStreamController.add(_anonNotes);
   }
@@ -100,30 +118,6 @@ class NotesService{
     }
   }
 
-  Future <DatabaseNote> updateCompletedNote({required DatabaseNote completedNote, required String text}) async {
-    await _ensureDbIsOpen();
-    final db = _getDatabaseOrThrow();
-    
-    //make sure note exists
-    await getCompletedNote(id: completedNote.id);
-    
-    //update db
-    final updatesCount = await db.update(completedNoteTable, {
-      textColumn: text, 
-      isSyncedWithCloudColumn: 0,
-    }, where: "id = ?", whereArgs: [completedNote.id]);
-    
-    if(updatesCount == 0)
-      throw CouldNotUpdateNotesException();
-    else{
-      final updatedNote = await getCompletedNote(id: completedNote.id);
-      _completedNotes.removeWhere((completedNote) => completedNote.id == updatedNote.id);
-      _completedNotes.add(updatedNote);
-      _completedNotesStreamController.add(_completedNotes);
-      return updatedNote;
-    }
-  }
-
   Future <AnonDatabaseNote> updateAnonNote({required AnonDatabaseNote note, required String text}) async {
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
@@ -140,7 +134,7 @@ class NotesService{
       throw CouldNotUpdateNotesException();
     else{
       final updatedNote = await getAnonNote(id: note.id);
-      _anonNotes.removeWhere((note) => note.id == note.id);
+      _anonNotes.removeWhere((note) => note.id == updatedNote.id);
       _anonNotes.add(note);
       _anonNotesStreamController.add(_anonNotes);
       return updatedNote;
@@ -357,7 +351,19 @@ class NotesService{
     else{
       return DatabaseUser.fromRow(results.first);
     }
+  }
 
+  Future <AuthUser?> getAnonUser() async {
+    await _ensureDbIsOpen();
+    print("GOT USER");
+    return AuthService.firebase().currentUser;
+  }
+
+  Future <AuthUser?> createAnonUser() async {
+    await _ensureDbIsOpen();
+    await FirebaseAuth.instance.signInAnonymously();
+    print("CREATED USER");
+    return AuthService.firebase().currentUser;
   }
 
   Future <DatabaseUser> createUser({required String email}) async {

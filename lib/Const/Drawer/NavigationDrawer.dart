@@ -188,8 +188,14 @@ void selectedItem(BuildContext context, int index) async {
           .push(MaterialPageRoute(builder: (context) => SettingsOnePage()));
       break;
     case 7:
+      Navigator.of(context).pushNamed(loginRoute);
       break;
     case 8:
+      final shouldLogOut = await showLogOutDialog(context);
+      if (shouldLogOut){
+        await AuthService.firebase().logOut();
+        Navigator.of(context).pushNamed(loginRoute);
+      }
       break;
   }
 }
