@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_to_do_list/Const/routes.dart';
 import 'package:real_to_do_list/services/crud/notes_service.dart';
 import 'package:real_to_do_list/utilities/dialogs/delete_dialog.dart';
 import 'package:real_to_do_list/Pages/new_note_view.dart';
@@ -18,15 +19,20 @@ class AnonNotesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _notesService = NotesService();
-
+    print(this.notes);
+    print(this.notes.length);
     return ListView.builder(
         itemCount: notes.length,
         itemBuilder: (context, index) {
           final note = notes[index];
           if (note.text.indexOf("✔") == -1) {
             return ListTile(
-              title: Text(note.text,
-                  maxLines: 1, softWrap: true, overflow: TextOverflow.ellipsis),
+              title: Text(
+                note.text,
+                maxLines: 1, 
+                softWrap: true, 
+                overflow: TextOverflow.ellipsis
+              ),
               trailing: IconButton(
                   onPressed: () async {
                     await _notesService.createAnonNote();

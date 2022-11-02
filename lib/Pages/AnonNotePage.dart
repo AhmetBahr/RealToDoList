@@ -59,7 +59,7 @@ class _AnonNotePage extends State<AnonNotePage> {
     if(storageService.get("today") != DateFormat('EEEE').format(date)){
       storageService.set("today", DateFormat('EEEE').format(date));
       _noteService.deleteAllNotes();
-      _noteService.deleteAllCompletedNotes();
+      _noteService.deleteAllAnonNotes();
     }
     
     return Scaffold(
@@ -95,7 +95,7 @@ class _AnonNotePage extends State<AnonNotePage> {
               ),
             ),
             child: FutureBuilder(
-              future: FirebaseAuth.instance.signInAnonymously(),
+              future: _noteService.getOrCreateAnonUser(),
               builder: (context, snapshot) {
                 switch(snapshot.connectionState){
                   case ConnectionState.done:
@@ -167,7 +167,6 @@ class _AnonNotePage extends State<AnonNotePage> {
 
 
 /* 
-
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -176,5 +175,4 @@ class _AnonNotePage extends State<AnonNotePage> {
               fit: BoxFit.cover,
             ),
           ),
-
           */
