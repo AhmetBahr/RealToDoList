@@ -8,51 +8,45 @@ import 'package:intl/date_symbol_data_local.dart';
 
 typedef DeleteNoteCallback = void Function(AnonDatabaseNote note);
 
-class AnonNotesListView extends StatelessWidget{
+class AnonNotesListView extends StatelessWidget {
   final List<AnonDatabaseNote> notes;
   final DeleteNoteCallback onDeleteNote;
   late final NotesService _notesService;
 
-  AnonNotesListView({Key? key, required this.notes, required this.onDeleteNote}) : super(key: key);
+  AnonNotesListView({Key? key, required this.notes, required this.onDeleteNote})
+      : super(key: key);
   @override
-  Widget build(BuildContext context){
-    
+  Widget build(BuildContext context) {
     _notesService = NotesService();
 
     return ListView.builder(
-      itemCount: notes.length,
-      itemBuilder: (context, index) {
-        final note = notes[index];
-        if(note.text.indexOf("✔") == -1){
-          return ListTile(
-            title: Text(
-              note.text,
-              maxLines: 1,
-              softWrap: true,
-              overflow: TextOverflow.ellipsis
-            ),
-            trailing: IconButton(
-              onPressed: () async {
-                await _notesService.createAnonNote();
-                await _notesService.updateAnonNote(note: notes[notes.length-1], text: "✔" + note.text);
-                onDeleteNote(note);
-              },
-              icon: const Icon(Icons.done)
-            ),
-          );
-        }
-        else{
-          return ListTile(
-            title: Text(
-              note.text,
-              maxLines: 1,
-              softWrap: true,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(decoration: TextDecoration.lineThrough),
-            ),
-          );
-        }
-      }
-    );
+        itemCount: notes.length,
+        itemBuilder: (context, index) {
+          final note = notes[index];
+          if (note.text.indexOf("✔") == -1) {
+            return ListTile(
+              title: Text(note.text,
+                  maxLines: 1, softWrap: true, overflow: TextOverflow.ellipsis),
+              trailing: IconButton(
+                  onPressed: () async {
+                    await _notesService.createAnonNote();
+                    await _notesService.updateAnonNote(
+                        note: notes[notes.length - 1], text: "✔" + note.text);
+                    onDeleteNote(note);
+                  },
+                  icon: const Icon(Icons.done)),
+            );
+          } else {
+            return ListTile(
+              title: Text(
+                note.text,
+                maxLines: 1,
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(decoration: TextDecoration.lineThrough),
+              ),
+            );
+          }
+        });
   }
 }

@@ -18,7 +18,7 @@ class _TextSubtitleState extends State<TextSubtitle> {
           fontSize: 30,
         ),
       ),
-      height: 60,
+      height: 20,
     );
   }
 }
