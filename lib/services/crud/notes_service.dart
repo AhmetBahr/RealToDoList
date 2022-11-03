@@ -130,9 +130,15 @@ class NotesService{
     else{
       final updatedAnonNote = await getAnonNote(id: note.id);
       _anonNotes.removeWhere((note) => note.id == updatedAnonNote.id);
-      _anonNotes.add(note);
+      if(updatedAnonNote.text.indexOf("✔") != -1){
+        print("This note goes to the depths below!");
+        _anonNotes.add(updatedAnonNote);
+      }
+      else{
+        print("This goes to the top!");
+        _anonNotes.insert(0, updatedAnonNote);
+      }
       _anonNotesStreamController.add(_anonNotes);
-      print(updatedAnonNote.text);
       return updatedAnonNote;
     }
   }
