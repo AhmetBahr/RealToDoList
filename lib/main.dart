@@ -25,6 +25,8 @@ import 'package:localstorage/localstorage.dart';
 
 import 'package:real_to_do_list/Pages/new_note_view.dart';
 
+import 'Pages/SettingsPages/share_button.dart';
+
 void main() {
   runZonedGuarded<Future<void>>(() async {
     setUpServiceLocator();
@@ -102,6 +104,7 @@ class MyApp extends StatelessWidget {
             verifyEmailRoute: (context) => const VerifyEmailView(),
             newNoteRoute: (context) => const NewNoteView(),
             newAnonNoteRoute: (context) => const NewAnonNoteView(),
+            shareRoute: (context) => const shareButton(),
           },
         ),
       ),

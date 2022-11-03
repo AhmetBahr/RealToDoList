@@ -16,7 +16,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   firebase_auth: ^3.11.2
-  flutterfire_cli: ^0.2.4
+  #flutterfire_cli: ^0.2.4
   provider: ^6.0.4
   hive_flutter: ^1.1.0
   get_it: ^7.2.0
@@ -26,6 +26,9 @@ dependencies:
   sqflite: ^2.2.0+2
   path: ^1.8.2
   localstorage: ^4.0.0+1
+  # share system
+  image_picker: ^0.8.6
+  share_plus: ^6.2.0
 
 dev_dependencies:
   flutter_test:
