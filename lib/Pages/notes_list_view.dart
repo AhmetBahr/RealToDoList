@@ -24,12 +24,19 @@ class NotesListView extends StatelessWidget{
   ); */
     _notesService = NotesService();
 
+    //print("LIST VIEW IN");
+    //print(this.notes);
+    //print(this.notes.length);
+    //print("LIST VIEW OUT");
+
     return ListView.builder(
       //reverse: true,
       itemCount: notes.length,
       itemBuilder: (context, index) {
         final note = notes[index];
         if(note.text.indexOf("✔") == -1){
+          //print("NOTE TEXT ARRIVED TO NOTES LIST VIEW;");
+          //print(note.text);
           return ListTile(
             title: Text(
               note.text,

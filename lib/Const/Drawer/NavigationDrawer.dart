@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_to_do_list/Const/routes.dart';
+import 'package:real_to_do_list/Pages/new_note_view.dart';
 
 import '../../Pages/NotePage.dart';
 import '../../Pages/SettingsPages/setting_pages.dart';
@@ -161,7 +162,6 @@ class NavigationDrawerWidget extends StatelessWidget {
 }
 
 void selectedItem(BuildContext context, int index) async {
-  Navigator.of(context).pop();
   switch (index) {
     case 0:
       Navigator.of(context)
@@ -193,11 +193,13 @@ void selectedItem(BuildContext context, int index) async {
     case 8:
       final shouldLogOut = await showLogOutDialog(context);
       if (shouldLogOut){
-        await AuthService.firebase().logOut();
-        Navigator.of(context).pushNamed(loginRoute);
+        await AuthService.firebase().logOut().whenComplete(() => 
+          Navigator.of(context).pushNamed(loginRoute)
+        );
       }
       break;
   }
+  Navigator.of(context).pop();
 }
 
 
