@@ -55,7 +55,7 @@ class _AnonNotePage extends State<AnonNotePage> {
     //Ertesi gün notları silme
     DateTime date = DateTime.now();
     
-    print("ANON NOTE PAGE");
+    //print("ANON NOTE PAGE");
     if(storageService.get("today") != DateFormat('EEEE').format(date)){
       storageService.set("today", DateFormat('EEEE').format(date));
       _noteService.deleteAllNotes();
@@ -96,6 +96,7 @@ class _AnonNotePage extends State<AnonNotePage> {
             child: FutureBuilder(
               future: _noteService.getOrCreateAnonUser(),
               builder: (context, snapshot) {
+                //print("BUILD!!!");
                 switch(snapshot.connectionState){
                   case ConnectionState.done:
                     return StreamBuilder(

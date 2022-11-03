@@ -14,7 +14,6 @@ class NotesService{
   Database? _db;
 
   List<DatabaseNote> _notes = [];
-  List<DatabaseNote> _completedNotes = [];
   List<AnonDatabaseNote> _anonNotes = [];
 
   //singleton
@@ -23,7 +22,6 @@ class NotesService{
     _notesStreamController = StreamController<List<DatabaseNote>>.broadcast( //broadcast lets you listen to it again
       onListen: () {
         _notesStreamController.sink.add(_notes);
-
       }
     );
     _anonNotesStreamController = StreamController<List<AnonDatabaseNote>>.broadcast( //broadcast lets you listen to it again
@@ -31,24 +29,17 @@ class NotesService{
         _anonNotesStreamController.sink.add(_anonNotes);
       }
     );
-    _completedNotesStreamController = StreamController<List<DatabaseNote>>.broadcast( //broadcast lets you listen to it again
-      onListen: () {
-        _completedNotesStreamController.sink.add(_completedNotes);
-
-      }
-    );
   }
   factory NotesService() => _shared;
 
   late final StreamController<List<DatabaseNote>> _notesStreamController;
-  late final StreamController<List<DatabaseNote>> _completedNotesStreamController;
   late final StreamController<List<AnonDatabaseNote>> _anonNotesStreamController;
 
   Stream<List<DatabaseNote>> get allNotes => _notesStreamController.stream; //Getter for getting all the notes
-  Stream<List<DatabaseNote>> get allCompletedNotes => _completedNotesStreamController.stream; //Getter for getting all the notes
   Stream<List<AnonDatabaseNote>> get allAnonNotes => _anonNotesStreamController.stream; //Getter for getting all the notes
   
   Future<DatabaseUser> getOrCreateUser({required String email}) async {
+    print("GET OR CREATE NORMAL USER");
     try{
       final user = await getUser(email: email);
       return user;
@@ -61,6 +52,7 @@ class NotesService{
   }
  
   Future<AuthUser?> getOrCreateAnonUser() async {
+    print("GET OR CREATE ANON USER");
     try{
       final user = await getAnonUser();
       return user;
@@ -73,6 +65,7 @@ class NotesService{
   }
   
   Future<void> _cacheNotes() async {
+    print("CACHE NORMAL NOTES");
     await _ensureDbIsOpen();
     final allNotes = await getAllNotes();
     _notes = allNotes.toList();
@@ -80,21 +73,15 @@ class NotesService{
   }
 
   Future<void> _cacheAnonNotes() async {
+    print("CACHE ANON NOTES");
     await _ensureDbIsOpen();
     final allAnonNotes = await getAllAnonNotes();
-    print(allAnonNotes);
     _anonNotes = allAnonNotes.toList();
     _anonNotesStreamController.add(_anonNotes);
   }
 
-  Future<void> _cacheCompletedNotes() async {
-    await _ensureDbIsOpen();
-    final allCompletedNotes = await getAllCompletedNotes();
-    _completedNotes = allCompletedNotes.toList();
-    _completedNotesStreamController.add(_completedNotes);
-  }
-
   Future <DatabaseNote> updateNote({required DatabaseNote note, required String text}) async {
+    print("UPDATE NORMAL NOTE");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     
@@ -112,13 +99,21 @@ class NotesService{
     else{
       final updatedNote = await getNote(id: note.id);
       _notes.removeWhere((note) => note.id == updatedNote.id);
-      _notes.add(updatedNote);
+      if(updatedNote.text.indexOf("✔") != -1){
+        print("This note goes to the depths below!");
+        _notes.add(updatedNote);
+      }
+      else{
+        print("This goes to the top!");
+        _notes.insert(0, updatedNote);
+      }
       _notesStreamController.add(_notes);
       return updatedNote;
     }
   }
 
   Future <AnonDatabaseNote> updateAnonNote({required AnonDatabaseNote note, required String text}) async {
+    print("UPDATE ANON NOTE");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     
@@ -133,16 +128,18 @@ class NotesService{
     if(updatesCount == 0)
       throw CouldNotUpdateNotesException();
     else{
-      final updatedNote = await getAnonNote(id: note.id);
-      _anonNotes.removeWhere((note) => note.id == updatedNote.id);
+      final updatedAnonNote = await getAnonNote(id: note.id);
+      _anonNotes.removeWhere((note) => note.id == updatedAnonNote.id);
       _anonNotes.add(note);
       _anonNotesStreamController.add(_anonNotes);
-      return updatedNote;
+      print(updatedAnonNote.text);
+      return updatedAnonNote;
     }
   }
 
 
   Future <Iterable<DatabaseNote>> getAllNotes() async {
+    print("GET ALL NORMAL NOTES");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final notes = await db.query(noteTable);
@@ -150,20 +147,15 @@ class NotesService{
   }
 
   Future <Iterable<AnonDatabaseNote>> getAllAnonNotes() async {
+    print("GET ALL ANON NOTES");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final notes = await db.query(anonNoteTable);
     return notes.map((anonNoteRow) => AnonDatabaseNote.fromRow(anonNoteRow));
   }
 
-  Future <Iterable<DatabaseNote>> getAllCompletedNotes() async {
-    await _ensureDbIsOpen();
-    final db = _getDatabaseOrThrow();
-    final completedNotes = await db.query(completedNoteTable);
-    return completedNotes.map((completedNoteRow) => DatabaseNote.fromRow(completedNoteRow));
-  }
-
   Future <DatabaseNote> getNote({required int id}) async {
+    print("GET NORMAL NOTE");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final notes = await db.query(noteTable, limit: 1, where: "id = ?", whereArgs: [id]);
@@ -180,6 +172,7 @@ class NotesService{
   }
 
   Future <AnonDatabaseNote> getAnonNote({required int id}) async {
+    print("GET ANON NOTE");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final notes = await db.query(anonNoteTable, limit: 1, where: "id = ?", whereArgs: [id]);
@@ -191,26 +184,13 @@ class NotesService{
       _anonNotes.removeWhere((note) => note.id == id);
       _anonNotes.add(note);
       _anonNotesStreamController.add(_anonNotes);
+      print(note.text);
       return note;
     }
   }
-  Future <DatabaseNote> getCompletedNote({required int id}) async {
-    await _ensureDbIsOpen();
-    final db = _getDatabaseOrThrow();
-    final notes = await db.query(completedNoteTable, limit: 1, where: "id = ?", whereArgs: [id]);
-    if(notes.isEmpty){
-      throw CouldNotFindNoteException();
-    }
-    else{
-      final note = DatabaseNote.fromRow(notes.first);
-      _notes.removeWhere((note) => note.id == id);
-      _notes.add(note);
-      _completedNotesStreamController.add(_notes);
-      return note;
-    }
-  }
-
+  
   Future <int> deleteAllNotes() async{
+    print("DELETE ALL NORMAL NOTES");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final numberOfDeletions = await db.delete(noteTable);
@@ -220,6 +200,7 @@ class NotesService{
   }
 
   Future <int> deleteAllAnonNotes() async{
+    print("DELETE ALL ANON NOTES");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final numberOfDeletions = await db.delete(anonNoteTable);
@@ -228,17 +209,8 @@ class NotesService{
     return numberOfDeletions;
   }
 
-
-  Future <int> deleteAllCompletedNotes() async{
-    await _ensureDbIsOpen();
-    final db = _getDatabaseOrThrow();
-    final numberOfDeletions = await db.delete(completedNoteTable);
-    _completedNotes = [];
-    _completedNotesStreamController.add(_completedNotes);
-    return numberOfDeletions;
-  }
-
   Future <void> deleteNote({required int id}) async {
+    print("DELETE NORMAL NOTE");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final deletedCount = await db.delete(noteTable, where: "id = ?", whereArgs: [id]);
@@ -251,6 +223,7 @@ class NotesService{
   }
 
   Future <void> deleteAnonNote({required int id}) async {
+    print("DELETE ANON NOTE");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final deletedCount = await db.delete(anonNoteTable, where: "id = ?", whereArgs: [id]);
@@ -263,6 +236,7 @@ class NotesService{
   }
 
   Future <DatabaseNote> createNote({required DatabaseUser owner}) async {
+    print("CREATE NORMAL NOTE");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     //make sure owner exists in the db with correct id
@@ -285,7 +259,6 @@ class NotesService{
         isSyncedWithCloud: true,
       );
 
-      _notes.add(note);
       _notesStreamController.add(_notes);
       
       return note;
@@ -293,6 +266,7 @@ class NotesService{
   }
 
   Future <AnonDatabaseNote> createAnonNote() async {
+    print("CREATE ANON NOTE");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     //make sure owner exists in the db with correct id
@@ -313,36 +287,8 @@ class NotesService{
     return note;
   }
 
-  Future <DatabaseNote> createCompletedNote({required DatabaseUser owner}) async {
-    await _ensureDbIsOpen();
-    final db = _getDatabaseOrThrow();
-    //make sure owner exists in the db with correct id
-    final dbUser = await getUser(email: owner.email);
-    if(dbUser != owner)
-      throw CouldNotFindUserException();
-    else{
-      const text = "";
-      //create the note
-      final noteId = await db.insert(completedNoteTable, {
-        userIdColumn: owner.id,
-        textColumn: text,
-        isSyncedWithCloudColumn: 1,
-      });
-
-      final note = DatabaseNote(
-        id: noteId,
-        userId: owner.id,
-        text: text,
-        isSyncedWithCloud: true,
-      );
-
-      _completedNotes.add(note);
-      _completedNotesStreamController.add(_completedNotes);
-      
-      return note;
-    }
-  }
   Future <DatabaseUser> getUser({required String email}) async {
+    print("GET NORMAL USER");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final results = await db.query(userTable, limit: 1, where: "email = ?", whereArgs: [email.toLowerCase()]);
@@ -367,6 +313,7 @@ class NotesService{
   }
 
   Future <DatabaseUser> createUser({required String email}) async {
+    print("CREATE NORMAL USER");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final results = await db.query(userTable, limit: 1, where: "email = ?", whereArgs: [email.toLowerCase()]);
@@ -378,6 +325,7 @@ class NotesService{
   }
 
   Future<void> deleteUser({required String email}) async {
+    print("DELETE USER");
     await _ensureDbIsOpen();
     final db = _getDatabaseOrThrow();
     final deletedCount = await db.delete(userTable, where: "email = ?", whereArgs: [email.toLowerCase()]);
@@ -387,6 +335,7 @@ class NotesService{
   }
 
   Database _getDatabaseOrThrow(){
+    print("GET DATABASE OR THROW");
     final db = _db;
     if(db == null)
       throw DatabaseIsNotOpenException();
@@ -395,14 +344,7 @@ class NotesService{
   }
 
   Future<void> _ensureDbIsOpen() async {
-    try{
-      await open();
-    } on DatabaseAlreadyOpenException{
-      
-    };
-  }
-
-  Future<void> ensureDbIsOpen() async {
+    print("ENSURE DB IS OPEN");
     try{
       await open();
     } on DatabaseAlreadyOpenException{
@@ -411,6 +353,7 @@ class NotesService{
   }
 
   Future<void> open() async{
+  print("OPEN");
     if(_db != null) 
       throw DatabaseAlreadyOpenException();
 
@@ -422,11 +365,9 @@ class NotesService{
 
       await db.execute(createUserTable);
       await db.execute(createNotesTable);
-      await db.execute(createCompletedNotesTable);
       await db.execute(createAnonNotesTable);
 
       await _cacheNotes();
-      await _cacheCompletedNotes();
       await _cacheAnonNotes();
     } on MissingPlatformDirectoryException {
       throw UnableToGetDocumentsDirectoryException();
@@ -434,6 +375,7 @@ class NotesService{
   }
 
   Future<void> close() async{
+    print("CLOSE");
     final db = _db;
     if (db==null)
       throw DatabaseIsNotOpenException();
@@ -469,7 +411,7 @@ class DatabaseUser{
 }
 
 class DatabaseNote{
-  final int id;
+  int id;
   final int userId;
   final String text;
   final bool isSyncedWithCloud;
@@ -518,7 +460,6 @@ const dbName = "notes.db";
 const noteTable = "note";
 const anonNoteTable = "anonNote";
 const userTable = "user";
-const completedNoteTable = "completed";
 const idColumn = "id";
 const emailColumn = "email";
 const userIdColumn = "user_id";
@@ -535,17 +476,6 @@ const createUserTable = '''
 
 const createNotesTable = '''
 CREATE TABLE IF NOT EXISTS "note" (
-  "id"  INTEGER NOT NULL,
-  "user_id" INTEGER NOT NULL,
-  "text"  TEXT,
-  "is_synced_with_cloud"  INTEGER NOT NULL DEFAULT 0,
-  FOREIGN KEY("user_id") REFERENCES "user"("id"),
-  PRIMARY KEY("id" AUTOINCREMENT)
-);
-''';
-
-const createCompletedNotesTable = '''
-CREATE TABLE IF NOT EXISTS "completed" (
   "id"  INTEGER NOT NULL,
   "user_id" INTEGER NOT NULL,
   "text"  TEXT,

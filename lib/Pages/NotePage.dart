@@ -45,7 +45,7 @@ class _NotePage extends State<NotePage> {
 
   @override
   Widget build(BuildContext context) {
-    print("USERS NOTE PAGE");
+    //print("USERS NOTE PAGE");
     final text = MediaQuery.of(context).platformBrightness == Brightness.dark
         ? 'DarkTheme'
         : 'LightTheme';
@@ -55,10 +55,10 @@ class _NotePage extends State<NotePage> {
     DateTime date = DateTime.now();
 
     if (storageService.get("today") != DateFormat('EEEE').format(date)) {
-      print("SİLİNDİ");
+      //print("SİLİNDİ");
       storageService.set("today", DateFormat('EEEE').format(date));
       _noteService.deleteAllNotes();
-      _noteService.deleteAllCompletedNotes();
+      _noteService.deleteAllAnonNotes();
     }
 
     return Scaffold(
