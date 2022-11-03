@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_to_do_list/Const/routes.dart';
 import 'package:real_to_do_list/Pages/Old_ThemaPage.dart';
 
 class SettingsOnePage extends StatelessWidget {
@@ -44,7 +45,7 @@ class SettingsOnePage extends StatelessWidget {
           ),
           Dil(),
           Degerlendir(),
-          paylas(),
+          paylas(context),
           G_bildirim(),
           hakkinda(),
           surum(),
@@ -240,7 +241,7 @@ Widget tarih_saat() => Container(
       ),
     );
 
-Widget paylas() => Container(
+Widget paylas(context) => Container(
       //  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
       margin: const EdgeInsets.only(
         right: 5.0,
@@ -249,7 +250,9 @@ Widget paylas() => Container(
       ),
       //color: Colors.grey,
       child: ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).pushNamed(shareRoute);
+        },
         title: Text(
           "Paylaş",
           style: TextStyle(
