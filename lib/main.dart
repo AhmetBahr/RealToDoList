@@ -58,31 +58,28 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<ThemeProvider>(
         child: FutureBuilder(
-          future: AuthService.firebase().initialize(),
-					builder: (context, snapshot){
-						switch(snapshot.connectionState){
-							case ConnectionState.done:
-								final user = AuthService.firebase().currentUser;
-								if(user != null){
-                  if(user.isAnonymous){
-                    return const AnonNotePage();
+            future: AuthService.firebase().initialize(),
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.done:
+                  final user = AuthService.firebase().currentUser;
+                  if (user != null) {
+                    if (user.isAnonymous) {
+                      return const AnonNotePage();
+                    }
+                    if (user.isEmailVerified) {
+                      debugPrint("Email is verified");
+                    } else {
+                      return const VerifyEmailView();
+                    }
+                  } else {
+                    return const LoginView();
                   }
-									if (user.isEmailVerified){
-										debugPrint("Email is verified");
-									}
-									else {
-										return const VerifyEmailView();
-									}
-								}
-								else {
-									return const LoginView();
-								}
-								return const NotePage();
-							default:
-								return const CircularProgressIndicator();
-						}
-					}
-        ), //Main sayfaya burdan erişiyoruz
+                  return const NotePage();
+                default:
+                  return const CircularProgressIndicator();
+              }
+            }), //Main sayfaya burdan erişiyoruz
         builder: (c, themeProvider, home) => MaterialApp(
           title: 'Flutter Theme And Primary Color Switcher',
           debugShowCheckedModeBanner: false,
@@ -97,7 +94,7 @@ class MyApp extends StatelessWidget {
           home: home,
           routes: {
             // themeaPagee: (context) => const ThmemePage(),
-            notesRoute:(context) => const NotePage(),
+            notesRoute: (context) => const NotePage(),
             anonNotesRoute: (context) => const AnonNotePage(),
             loginRoute: (context) => const LoginView(),
             registerRoute: (context) => const RegisterView(),
@@ -105,6 +102,7 @@ class MyApp extends StatelessWidget {
             newNoteRoute: (context) => const NewNoteView(),
             newAnonNoteRoute: (context) => const NewAnonNoteView(),
             shareRoute: (context) => const shareButton(),
+            themeaPagee: (context) => const ThemePage()
           },
         ),
       ),

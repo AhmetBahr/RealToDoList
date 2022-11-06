@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:real_to_do_list/Const/NewTheme/Theme_provider.dart';
+import 'package:real_to_do_list/presentation/pr/Models/Widgets/primary_color_option.dart';
+import 'package:real_to_do_list/presentation/pr/Models/Widgets/switcher_container.dart';
 
-class PrimaryBGOption extends StatelessWidget {
-  const PrimaryBGOption({
+import '../Styles/app_colors.dart';
+
+class PrimaryBGSwitcher extends StatelessWidget {
+  const PrimaryBGSwitcher({
     Key? key,
     required this.color,
     this.isSelected = false,
@@ -19,7 +25,7 @@ class PrimaryBGOption extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         key: Key('__${color.value}_color_option__'),
-        padding: const EdgeInsets.all(14),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           border: Border.all(
             color: isSelected
@@ -30,10 +36,10 @@ class PrimaryBGOption extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Container(
-          width: 130,
-          height: 80,
+          width: 50,
+          height: 50,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(3),
             color: color,
           ),
         ),

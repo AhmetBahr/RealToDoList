@@ -19,7 +19,7 @@ class shareButton extends StatelessWidget {
       900: Color(0xFFB71C1C),
     },
   );
-   const shareButton({super.key} );
+  const shareButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,21 +50,24 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text('Paylaş oglim'),
-            SizedBox(height: 10,),
-            IconButton(onPressed: sharePressed, icon: Icon(Icons.share, color: Colors.redAccent,)),
-
+            SizedBox(
+              height: 10,
+            ),
+            IconButton(
+                onPressed: sharePressed,
+                icon: Icon(
+                  Icons.share,
+                  color: Colors.redAccent,
+                )),
           ],
         ),
       ),
     );
   }
-  void sharePressed(){
-  String message = 'Agalar basıldığı zaman buradan yazı çıkıyor haberiniz ola. buraya link atılır';
-  Share.share(message);
+
+  void sharePressed() {
+    String message =
+        'Agalar basıldığı zaman buradan yazı çıkıyor haberiniz ola. buraya link atılır';
+    Share.share(message);
   }
-  
 }
-
-
-
-

@@ -5,5 +5,5 @@ const anonNotesRoute = "/anonNotePage/";
 const verifyEmailRoute = "/verify-email";
 const newNoteRoute = "/notes/new-note";
 const newAnonNoteRoute = "/notes/new-anon-note";
-const themeaPagee = "/";
+const themeaPagee = "/themePage";
 const shareRoute = "sharePage";
