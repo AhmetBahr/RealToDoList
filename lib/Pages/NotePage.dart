@@ -32,6 +32,7 @@ class _NotePage extends State<NotePage> {
   final StorageService storageService = getIt<StorageService>();
   late final NotesService _noteService;
   String get userEmail => AuthService.firebase().currentUser!.email!;
+  late String bg = storageService.get("bg");
 
   @override
   void initState() {
@@ -45,6 +46,8 @@ class _NotePage extends State<NotePage> {
 
   @override
   Widget build(BuildContext context) {
+    print(bg);
+
     //print("USERS NOTE PAGE");
     final text = MediaQuery.of(context).platformBrightness == Brightness.dark
         ? 'DarkTheme'

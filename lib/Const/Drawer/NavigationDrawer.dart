@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:real_to_do_list/Const/routes.dart';
+import 'package:real_to_do_list/Pages/Theme_Settings_Page.dart';
 import 'package:real_to_do_list/Pages/new_note_view.dart';
 
 import '../../Pages/NotePage.dart';
 import '../../Pages/SettingsPages/setting_pages.dart';
 import '../../Pages/Old_ThemaPage.dart';
-import '../../Pages/Theme_Settings_Page.dart';
 import '../../Pages/login_view.dart';
 import '../../utilities/dialogs/logout_dialog.dart';
 import '../../services/auth/auth_service.dart';
@@ -39,7 +39,7 @@ class NavigationDrawerWidget extends StatelessWidget {
             buildMenuItem(
               text: "Pro",
               icon: Icons.account_balance_rounded,
-              onClicked: () => selectedItem(context, 0),
+              onClicked2: () => selectedItem(context, 0),
             ),
             const SizedBox(
               height: 5,
@@ -47,50 +47,50 @@ class NavigationDrawerWidget extends StatelessWidget {
             buildMenuItem(
                 text: "Yıldızlı Görevler",
                 icon: Icons.star_rounded,
-                onClicked: () => selectedItem(context, 1)),
+                onClicked2: () => selectedItem(context, 1)),
             const SizedBox(
               height: 5,
             ),
             buildMenuItem(
                 text: "Kategori",
                 icon: Icons.category,
-                onClicked: () => selectedItem(context, 2)),
+                onClicked2: () => selectedItem(context, 2)),
             const Divider(
               color: Colors.black,
             ),
             buildMenuItem(
                 text: "Tema",
                 icon: Icons.brightness_medium_sharp,
-                onClicked: () => selectedItem(context, 3)),
+                onClicked2: () => selectedItem(context, 3)),
             const SizedBox(
               height: 5,
             ),
             buildMenuItem(
                 text: "Bağış",
                 icon: Icons.favorite,
-                onClicked: () => selectedItem(context, 4)),
+                onClicked2: () => selectedItem(context, 4)),
             const SizedBox(
               height: 5,
             ),
             buildMenuItem(
                 text: "Geri Bildirim",
                 icon: Icons.border_color_outlined,
-                onClicked: () => selectedItem(context, 5)),
+                onClicked2: () => selectedItem(context, 5)),
             const SizedBox(
               height: 5,
             ),
             buildMenuItem(
                 text: "Ayarlar",
                 icon: Icons.settings_rounded,
-                onClicked: () => selectedItem(context, 6)),
+                onClicked2: () => selectedItem(context, 6)),
             buildMenuItem(
                 text: "Profile",
                 icon: Icons.people_alt_rounded,
-                onClicked: () => selectedItem(context, 7)),
+                onClicked2: () => selectedItem(context, 7)),
             buildMenuItem(
                 text: "Çıkış Yap",
                 icon: Icons.logout,
-                onClicked: () => selectedItem(context, 8)),
+                onClicked2: () => selectedItem(context, 8)),
             const SizedBox(
               height: 5,
             ),
@@ -141,7 +141,7 @@ class NavigationDrawerWidget extends StatelessWidget {
   Widget buildMenuItem({
     required String text,
     required IconData icon,
-    onClicked, //voidCallBack? onClicked  anlamadım düzeldi
+    onClicked2, //voidCallBack? onClicked  anlamadım düzeldi
   }) {
     final color = Colors.grey[700];
     final hoverColor = Colors.white;
@@ -156,16 +156,15 @@ class NavigationDrawerWidget extends StatelessWidget {
         style: TextStyle(color: color),
       ),
       hoverColor: hoverColor,
-      onTap: onClicked,
+      onTap: onClicked2,
     );
   }
 }
 
 void selectedItem(BuildContext context, int index) async {
+  Navigator.of(context).pop();
   switch (index) {
     case 0:
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => NotePage()));
       break;
     case 1:
       print("Presed 1");
@@ -174,8 +173,9 @@ void selectedItem(BuildContext context, int index) async {
       print("Presed 2");
       break;
     case 3:
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => SettingsPage()));
+      Navigator.of(context).pushNamed(themeaPagee);
+
+      print("Presed3");
       break;
     case 4:
       print("Presed 4");
@@ -184,22 +184,19 @@ void selectedItem(BuildContext context, int index) async {
       print("Presed 5");
       break;
     case 6:
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => SettingsOnePage()));
       break;
     case 7:
       Navigator.of(context).pushNamed(loginRoute);
       break;
     case 8:
       final shouldLogOut = await showLogOutDialog(context);
-      if (shouldLogOut){
-        await AuthService.firebase().logOut().whenComplete(() => 
-          Navigator.of(context).pushNamed(loginRoute)
-        );
+      if (shouldLogOut) {
+        await AuthService.firebase()
+            .logOut()
+            .whenComplete(() => Navigator.of(context).pushNamed(loginRoute));
       }
       break;
   }
-  Navigator.of(context).pop();
 }
 
 

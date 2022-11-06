@@ -5,8 +5,8 @@ import '../presentation/pr/Models/Widgets/primary_BG_switchs.dart';
 import '../presentation/pr/Models/Widgets/primary_color_switchs.dart';
 import '../presentation/pr/Models/Widgets/theme_switcher.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+class ThemePage extends StatelessWidget {
+  const ThemePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
