@@ -5,7 +5,6 @@ import 'package:real_to_do_list/Pages/new_note_view.dart';
 
 import '../../Pages/NotePage.dart';
 import '../../Pages/SettingsPages/setting_pages.dart';
-import '../../Pages/Old_ThemaPage.dart';
 import '../../Pages/login_view.dart';
 import '../../utilities/dialogs/logout_dialog.dart';
 import '../../services/auth/auth_service.dart';
@@ -143,17 +142,17 @@ class NavigationDrawerWidget extends StatelessWidget {
     required IconData icon,
     onClicked2, //voidCallBack? onClicked  anlamadım düzeldi
   }) {
-    final color = Colors.grey[700];
+    // final color = Colors.grey[700];
     final hoverColor = Colors.white;
 
     return ListTile(
       leading: Icon(
         icon,
-        color: color,
+        // color: color,
       ),
       title: Text(
         text,
-        style: TextStyle(color: color),
+        style: TextStyle(/*  color: color   */),
       ),
       hoverColor: hoverColor,
       onTap: onClicked2,

@@ -22,33 +22,98 @@ class PrimaryBGSwitcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        card2(context),
-        card3(),
-        card4(),
-        card5(),
-      ],
-    );
-    /*  return SwitcherContainer(
-      title: 'Primary Color',
-      content: Consumer<ThemeProvider>(
-        builder: (c, themeProvider, _) {
-          return Wrap();
-        },
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      margin: EdgeInsets.all(20),
+      child: Container(
+        height: 450,
+        color: Colors.amber,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Text(
+                  "  To Do List",
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                card2(context),
+                card3(context),
+              ],
+            ),
+            Row(
+              children: [
+                card2(context),
+                card3(context),
+              ],
+            ),
+            Row(
+              children: [
+                card2(context),
+                card3(context),
+              ],
+            ),
+          ],
+        ),
       ),
-    );*/
+    );
   }
 }
 
 final StorageService storageService = getIt<StorageService>();
 Widget card2(context) => Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      margin: EdgeInsets.all(14),
+      color: Colors.blue,
+      child: new InkWell(
+        onTap: () {
+          storageService.set("bg", "asset/svg/unlem.png");
+          print("tapped");
+          Navigator.pop(context); // pop current page
+          Navigator.of(context).pushNamed(anonNotesRoute); // push it back in
+        },
+        child: Container(
+          width: 150.0,
+          height: 100.0,
+        ),
+      ),
+    );
+
+Widget card3(context) => Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      margin: EdgeInsets.all(10),
+      color: Colors.blue,
+      child: new InkWell(
+        onTap: () {
+          storageService.set("bg", "asset/svg/undraw_Annotation_re_h774.png");
+          print("tapped");
+          Navigator.pop(context); // pop current page
+          Navigator.of(context).pushNamed(anonNotesRoute); // push it back in
+        },
+        child: Container(
+          width: 150.0,
+          height: 100.0,
+        ),
+      ),
+    );
+
+Widget card4(context) => Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       margin: EdgeInsets.all(10),
       color: Colors.blue,
       child: new InkWell(
         onTap: () {
-          storageService.set("bg", "asset/svg/pexels-photo-13866617.jpeg");
+          storageService.set(
+              "bg", "asset/svg/undraw_Accept_request_re_d81h.png");
           print("tapped");
           Navigator.pop(context); // pop current page
           Navigator.of(context).pushNamed(anonNotesRoute); // push it back in
@@ -60,37 +125,7 @@ Widget card2(context) => Card(
       ),
     );
 
-Widget card3() => Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      margin: EdgeInsets.all(10),
-      color: Colors.blue,
-      child: new InkWell(
-        onTap: () {
-          print("tapped");
-        },
-        child: Container(
-          width: 75.0,
-          height: 75.0,
-        ),
-      ),
-    );
-
-Widget card4() => Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      margin: EdgeInsets.all(10),
-      color: Colors.blue,
-      child: new InkWell(
-        onTap: () {
-          print("tapped");
-        },
-        child: Container(
-          width: 75.0,
-          height: 75.0,
-        ),
-      ),
-    );
-
-Widget card5() => Card(
+Widget card5(context) => Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       margin: EdgeInsets.all(10),
       color: Colors.blue,
