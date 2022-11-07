@@ -7,13 +7,8 @@ class AppColors {
   static const Color primaryOption4 = Color(0xff13d0c1);
   static const Color primaryOption5 = Color(0xffe5672f);
   static const Color primaryOption6 = Color(0xffb73d99);
-  static const Color primaryOption7 = Color.fromARGB(255, 168, 197, 36);
-  static const Color primaryOption8 = Color.fromARGB(255, 74, 28, 184);
-
-  static const String primaryBG1 = "asset/svg/unlem.png";
-  static const String primaryBG2 = "undraw_Annotation_re_h774.png";
-  static const String primaryBG3 = "undraw_Accept_request_re_d81h.png";
-  static const String primaryBG4 = "pexels-photo-13866617.jpeg";
+  static const Color primaryOption7 = Color.fromARGB(252, 203, 144, 0);
+  static const Color primaryOption8 = Color.fromARGB(96, 71, 223, 184);
 
   static const Color white = Color(0xffffffff);
   static const Color white50 = Color(0x88ffffff);
@@ -34,13 +29,6 @@ class AppColors {
     primaryOption6,
     primaryOption7,
     primaryOption8,
-  ];
-
-  static List<String> primaryBackOptions = const [
-    primaryBG1,
-    primaryBG2,
-    primaryBG3,
-    primaryBG4,
   ];
 
   static Color getShade(Color color, {bool darker = false, double value = .1}) {
@@ -70,3 +58,15 @@ class AppColors {
     return MaterialColor(color.value, _colorShades);
   }
 }
+
+
+/*
+
+    final hsl = HSLColor.fromColor(color);
+    final hslDark = hsl.withLightness(
+        (darker ? (hsl.lightness - value) : (hsl.lightness + value))
+            .clamp(0.0, 1.0));
+
+    return hslDark.toColor();
+
+*/

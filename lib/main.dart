@@ -19,7 +19,6 @@ import 'Const/NewTheme/Theme_provider.dart';
 import 'Const/OldTheme/thmema_provader.dart';
 import 'Pages/NotePage.dart';
 import 'Pages/AnonNotePage.dart';
-import 'Pages/Old_ThemaPage.dart';
 import 'Pages/Theme_Settings_Page.dart';
 import 'package:localstorage/localstorage.dart';
 

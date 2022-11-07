@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:real_to_do_list/Const/routes.dart';
-import 'package:real_to_do_list/Pages/Old_ThemaPage.dart';
 
 class SettingsOnePage extends StatelessWidget {
   static final String path = "lib/Pages/SettingsPages/settings_pages.dart";
