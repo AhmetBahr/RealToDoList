@@ -103,9 +103,18 @@ class NotesService{
         print("This note goes to the depths below!");
         _notes.add(updatedNote);
       }
+      else if(updatedNote.text.indexOf("★") != -1){
+        print("This goes to the ABSOLUTE top!");
+        _notes.insert(0, updatedNote);
+      }
       else{
         print("This goes to the top!");
-        _notes.insert(0, updatedNote);
+        int lastStarredNote = 0;
+        for (int i = 0; i<_notes.length; i++){
+          if(_notes[i].text.indexOf("★") != -1)
+            lastStarredNote++;
+        }
+        _notes.insert(lastStarredNote, updatedNote);
       }
       _notesStreamController.add(_notes);
       return updatedNote;
@@ -134,9 +143,18 @@ class NotesService{
         print("This note goes to the depths below!");
         _anonNotes.add(updatedAnonNote);
       }
+      else if(updatedAnonNote.text.indexOf("★") != -1){
+        print("This goes to the ABSOLUTE top!");
+        _anonNotes.insert(0, updatedAnonNote);
+      }
       else{
         print("This goes to the top!");
-        _anonNotes.insert(0, updatedAnonNote);
+        int lastStarredNote = 0;
+        for (int i = 0; i<_anonNotes.length; i++){
+          if(_anonNotes[i].text.indexOf("★") != -1)
+            lastStarredNote++;
+        }
+        _anonNotes.insert(lastStarredNote, updatedAnonNote);
       }
       _anonNotesStreamController.add(_anonNotes);
       return updatedAnonNote;

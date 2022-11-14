@@ -33,7 +33,7 @@ class AnonNotePage extends StatefulWidget {
 class _AnonNotePage extends State<AnonNotePage> {
   final StorageService storageService = getIt<StorageService>();
   late final NotesService _noteService;
-  late String bg = storageService.get("bg");
+  //late String bg = storageService.get("bg");
 
   //String get userEmail => AuthService.firebase().currentUser!.email!;
   var i = 0;
@@ -102,7 +102,8 @@ class _AnonNotePage extends State<AnonNotePage> {
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(bg),
+                    //image: AssetImage(bg),
+                    image: AssetImage("asset/svg/unlem.png"),
                     fit: BoxFit.contain,
                   ),
                 ),

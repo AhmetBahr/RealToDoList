@@ -35,13 +35,30 @@ class AnonNotesListView extends StatelessWidget {
               softWrap: true, 
               overflow: TextOverflow.ellipsis
             ),
-            trailing: IconButton(
-                onPressed: () async {
-                  await _notesService.createAnonNote();
-                  await _notesService.updateAnonNote(note: notes[notes.length - 1], text: "✔" + note.text);
-                  onDeleteNote(note);
-                },
-                icon: const Icon(Icons.done)),
+            trailing: 
+              Wrap(
+                spacing: 12,
+                children: [
+                  IconButton(
+                    onPressed: () async {
+                      await _notesService.createAnonNote();
+                      await _notesService.updateAnonNote(note: notes[notes.length - 1], text: "✔" + note.text);
+                      onDeleteNote(note);
+                    },
+                    icon: const Icon(Icons.done)
+                  ),
+                  IconButton(
+                    onPressed: () async {
+                      if(note.text.indexOf("★") == -1){
+                        await _notesService.createAnonNote();
+                        await _notesService.updateAnonNote(note: notes[notes.length - 1], text: "★" + note.text);
+                        onDeleteNote(note);
+                      }
+                    },
+                    icon: const Icon(Icons.star)
+                  ),
+                ],
+              )
           );
         } 
         else {
